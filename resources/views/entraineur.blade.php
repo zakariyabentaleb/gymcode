@@ -1,0 +1,666 @@
+@extends('layouts.app')
+
+@section('title', 'GymTracker - No Pain, No Gain')
+
+@section('content')
+<body class="bg-brand-light font-sans">
+    <!-- Navigation -->
+    <nav class="bg-brand-dark text-white shadow-lg fixed w-full z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-dumbbell text-brand-red text-2xl"></i>
+                    <span class="font-bold text-xl tracking-wider">GYM<span class="text-brand-red">TRACKER</span></span>
+                </div>
+                <div class="hidden md:flex items-center space-x-10">
+                    <a href="{{route('home')}}" class="nav-link hover:text-brand-red transition duration-300 font-medium">Accueil</a>
+                    <a href="{{route('programmes')}}" class="nav-link hover:text-brand-red transition duration-300 font-medium">Programmes</a>
+                    <a href="{{route('entraineur')}}" class="nav-link text-brand-red font-medium">Entraîneurs</a>
+                    <a href="{{route('contact')}}" class="nav-link hover:text-brand-red transition duration-300 font-medium">Contact</a>
+                    <a href="#" class="bg-brand-red hover:bg-red-700 transition duration-300 py-2 px-6 rounded-lg font-semibold">Se connecter</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-white focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative hero-pattern pt-20">
+        <div class="absolute inset-0 gradient-overlay z-10"></div>
+        <div class="container mx-auto px-4 py-32 md:py-40 relative z-20">
+            <div class="max-w-3xl">
+                <h5 class="text-brand-red font-semibold mb-4 tracking-wider">NOS EXPERTS FITNESS</h5>
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-6 text-white text-shadow leading-tight">DES <span class="text-brand-red">ENTRAÎNEURS</span> PASSIONNÉS ET QUALIFIÉS</h1>
+                <p class="text-lg mb-10 text-gray-200 max-w-xl">Découvrez notre équipe d'entraîneurs certifiés, prêts à vous accompagner dans votre parcours de fitness et à vous aider à atteindre vos objectifs.</p>
+                <div class="flex space-x-4">
+                    <a href="#trainers" class="btn-primary bg-brand-red hover:bg-red-700 transition duration-500 py-3 px-8 rounded-lg font-semibold text-white uppercase tracking-wide">Voir les entraîneurs</a>
+                    <a href="#booking" class="border-2 border-white hover:border-brand-red hover:text-brand-red transition duration-300 py-3 px-8 rounded-lg font-semibold text-white uppercase tracking-wide">Réserver une séance</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Our Trainers Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h5 class="text-brand-red font-semibold mb-2 tracking-wider">POURQUOI NOUS CHOISIR</h5>
+                <h2 class="text-3xl font-bold mb-4 text-brand-dark">Un Accompagnement d'Excellence</h2>
+                <p class="max-w-2xl mx-auto text-gray-600">Nos entraîneurs sont sélectionnés rigoureusement pour leurs compétences, leur expérience et leur approche personnalisée.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-500 border-t-4 border-brand-red">
+                    <div class="w-16 h-16 bg-brand-red text-white rounded-xl flex items-center justify-center mb-6 transform -rotate-6">
+                        <i class="fas fa-medal text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-brand-dark">Certifications Professionnelles</h3>
+                    <p class="text-gray-600">Tous nos entraîneurs sont certifiés par des organismes de fitness reconnus et suivent régulièrement des formations pour rester à jour.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-500 border-t-4 border-brand-red">
+                    <div class="w-16 h-16 bg-brand-red text-white rounded-xl flex items-center justify-center mb-6 transform -rotate-6">
+                        <i class="fas fa-clipboard-check text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-brand-dark">Programmes Personnalisés</h3>
+                    <p class="text-gray-600">Chaque plan d'entraînement est conçu spécifiquement pour vous, en tenant compte de vos objectifs, votre niveau et vos contraintes personnelles.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-500 border-t-4 border-brand-red">
+                    <div class="w-16 h-16 bg-brand-red text-white rounded-xl flex items-center justify-center mb-6 transform -rotate-6">
+                        <i class="fas fa-heartbeat text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-brand-dark">Suivi Continu</h3>
+                    <p class="text-gray-600">Bénéficiez d'un suivi régulier de vos progrès, avec des ajustements de programme et des conseils nutritionnels adaptés à votre évolution.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Trainers Section -->
+    <section id="trainers" class="py-20 bg-brand-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h5 class="text-brand-red font-semibold mb-2 tracking-wider">NOTRE ÉQUIPE</h5>
+                <h2 class="text-3xl font-bold mb-4 text-brand-dark">Rencontrez Nos Entraîneurs</h2>
+                <p class="max-w-2xl mx-auto text-gray-600">Une équipe diversifiée d'experts passionnés, prêts à vous accompagner dans votre transformation physique.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Trainer 1 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden trainer-card transition duration-500">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd" alt="Thomas Laurent" class="w-full h-80 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-dark to-transparent py-6 px-6">
+                            <h3 class="text-white font-bold text-xl">Thomas Laurent</h3>
+                            <p class="text-gray-300">Coach de musculation</p>
+                        </div>
+                        <div class="absolute top-4 right-4 flex space-x-2">
+                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Musculation</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Force</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Nutrition</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Spécialiste en musculation avec 8 ans d'expérience. Thomas vous aidera à développer votre masse musculaire et à améliorer votre force.</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="flex text-yellow-400 mb-1">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <p class="text-sm text-gray-500">32 avis clients</p>
+                            </div>
+                            <a href="#" class="bg-brand-red hover:bg-red-700 text-white py-2 px-4 rounded-lg transition duration-300">Réserver</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trainer 2 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden trainer-card transition duration-500">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1509833903111-9cb142f644e4" alt="Sarah Dubois" class="w-full h-80 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-dark to-transparent py-6 px-6">
+                            <h3 class="text-white font-bold text-xl">Sarah Dubois</h3>
+                            <p class="text-gray-300">Coach fitness</p>
+                        </div>
+                        <div class="absolute top-4 right-4 flex space-x-2">
+                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">HIIT</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Cardio</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Perte de poids</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Experte en fitness fonctionnel et HIIT. Sarah vous accompagnera pour perdre du poids et améliorer votre condition physique générale.</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="flex text-yellow-400 mb-1">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p class="text-sm text-gray-500">47 avis clients</p>
+                            </div>
+                            <a href="#" class="bg-brand-red hover:bg-red-700 text-white py-2 px-4 rounded-lg transition duration-300">Réserver</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trainer 3 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden trainer-card transition duration-500">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b" alt="Marc Renaud" class="w-full h-80 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-dark to-transparent py-6 px-6">
+                            <h3 class="text-white font-bold text-xl">Marc Renaud</h3>
+                            <p class="text-gray-300">Coach CrossFit</p>
+                        </div>
+                        <div class="absolute top-4 right-4 flex space-x-2">
+                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">CrossFit</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Fonctionnel</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Performance</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Coach CrossFit certifié avec une approche axée sur la performance. Marc vous aidera à repousser vos limites et à atteindre votre plein potentiel.</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="flex text-yellow-400 mb-1">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <p class="text-sm text-gray-500">29 avis clients</p>
+                            </div>
+                            <a href="#" class="bg-brand-red hover:bg-red-700 text-white py-2 px-4 rounded-lg transition duration-300">Réserver</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trainer 4 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden trainer-card transition duration-500">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883" alt="Emma Martin" class="w-full h-80 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-dark to-transparent py-6 px-6">
+                            <h3 class="text-white font-bold text-xl">Emma Martin</h3>
+                            <p class="text-gray-300">Coach Yoga & Pilates</p>
+                        </div>
+                        <div class="absolute top-4 right-4 flex space-x-2">
+                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Yoga</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Pilates</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Relaxation</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Spécialiste en yoga et pilates. Emma vous guidera vers un meilleur équilibre physique et mental à travers des pratiques douces et efficaces.</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="flex text-yellow-400 mb-1">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <p class="text-sm text-gray-500">38 avis clients</p>
+                            </div>
+                            <a href="#" class="bg-brand-red hover:bg-red-700 text-white py-2 px-4 rounded-lg transition duration-300">Réserver</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trainer 5 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden trainer-card transition duration-500">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc" alt="Lucas Bernard" class="w-full h-80 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-dark to-transparent py-6 px-6">
+                            <h3 class="text-white font-bold text-xl">Lucas Bernard</h3>
+                            <p class="text-gray-300">Coach de boxe</p>
+                        </div>
+                        <div class="absolute top-4 right-4 flex space-x-2">
+                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Boxe</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Self-défense</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Cardio</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Ancien champion de boxe reconverti en coach sportif. Lucas vous initiera aux techniques de boxe tout en améliorant votre condition physique.</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="flex text-yellow-400 mb-1">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <p class="text-sm text-gray-500">26 avis clients</p>
+                            </div>
+                            <a href="#" class="bg-brand-red hover:bg-red-700 text-white py-2 px-4 rounded-lg transition duration-300">Réserver</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trainer 6 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden trainer-card transition duration-500">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1595078475328-1ab05d0a6a0e" alt="Julie Moreau" class="w-full h-80 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-dark to-transparent py-6 px-6">
+                            <h3 class="text-white font-bold text-xl">Julie Moreau</h3>
+                            <p class="text-gray-300">Nutritionniste sportive</p>
+                        </div>
+                        <div class="absolute top-4 right-4 flex space-x-2">
+                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Nutrition</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Diététique</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Bien-être</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Nutritionniste spécialisée dans le sport. Julie vous aidera à optimiser votre alimentation pour maximiser vos performances et votre récupération.</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="flex text-yellow-400 mb-1">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p class="text-sm text-gray-500">41 avis clients</p>
+                            </div>
+                            <a href="#" class="bg-brand-red hover:bg-red-700 text-white py-2 px-4 rounded-lg transition duration-300">Réserver</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center text-brand-red hover:text-red-700 font-semibold transition duration-300">
+                    <span>Voir tous nos entraîneurs</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Categories Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h5 class="text-brand-red font-semibold mb-2 tracking-wider">SPÉCIALITÉS</h5>
+                <h2 class="text-3xl font-bold mb-4 text-brand-dark">Nos Domaines d'Expertise</h2>
+                <p class="max-w-2xl mx-auto text-gray-600">Découvrez les différents domaines dans lesquels nos entraîneurs se spécialisent pour vous offrir une expérience d'entraînement complète.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Category 1 -->
+                <div class="group overflow-hidden rounded-xl shadow-lg relative">
+                    <img src="https://images.unsplash.com/photo-1546483875-ad9014c88eba" alt="Musculation" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent opacity-70"></div>
+                    <div class="absolute bottom-0 left-0 p-6">
+                        <h3 class="text-white font-bold text-xl mb-2">Musculation</h3>
+                        <p class="text-gray-200 mb-4 text-sm">Développez votre masse musculaire et votre force</p>
+                        <a href="#" class="inline-flex items-center text-white bg-brand-red hover:bg-red-700 px-4 py-2 rounded-lg transition duration-300 text-sm">
+                            <span>En savoir plus</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Category 2 -->
+                <div class="group overflow-hidden rounded-xl shadow-lg relative">
+                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a" alt="Cardio" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent opacity-70"></div>
+                    <div class="absolute bottom-0 left-0 p-6">
+                        <h3 class="text-white font-bold text-xl mb-2">Cardio & HIIT</h3>
+                        <p class="text-gray-200 mb-4 text-sm">Améliorez votre endurance et brûlez des calories</p>
+                        <a href="#" class="inline-flex items-center text-white bg-brand-red hover:bg-red-700 px-4 py-2 rounded-lg transition duration-300 text-sm">
+                            <span>En savoir plus</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Category 3 -->
+                <div class="group overflow-hidden rounded-xl shadow-lg relative">
+                    <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0" alt="Yoga" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent opacity-70"></div>
+                    <div class="absolute bottom-0 left-0 p-6">
+                        <h3 class="text-white font-bold text-xl mb-2">Yoga & Pilates</h3>
+                        <p class="text-gray-200 mb-4 text-sm">Retrouvez équilibre, souplesse et sérénité</p>
+                        <a href="#" class="inline-flex items-center text-white bg-brand-red hover:bg-red-700 px-4 py-2 rounded-lg transition duration-300 text-sm">
+                            <span>En savoir plus</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Category 4 -->
+                <div class="group overflow-hidden rounded-xl shadow-lg relative">
+                    <img src="https://images.unsplash.com/photo-1615915625018-da195fc22f0c" alt="Nutrition" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent opacity-70"></div>
+                    <div class="absolute bottom-0 left-0 p-6">
+                        <h3 class="text-white font-bold text-xl mb-2">Nutrition</h3>
+                        <p class="text-gray-200 mb-4 text-sm">Optimisez votre alimentation pour vos objectifs</p>
+                        <a href="#" class="inline-flex items-center text-white bg-brand-red hover:bg-red-700 px-4 py-2 rounded-lg transition duration-300 text-sm">
+                            <span>En savoir plus</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="py-20 bg-brand-dark">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
+                    <h5 class="text-brand-red font-semibold mb-2 tracking-wider">DÉMARREZ VOTRE PARCOURS</h5>
+                    <h2 class="text-3xl font-bold mb-6 text-white">Réservez une Séance d'Entraînement</h2>
+                    <p class="text-gray-300 mb-8">Prêt à commencer votre transformation ? Réservez une séance d'évaluation avec l'un de nos entraîneurs qualifiés pour déterminer vos objectifs et créer un plan personnalisé adapté à vos besoins.</p>
+                    
+                    <div class="mb-8">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-brand-red rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-comments text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold mb-1">Consultation Initiale</h4>
+                                <p class="text-gray-400">Discussion sur vos objectifs et votre niveau actuel</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-brand-red rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-clipboard-list text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold mb-1">Évaluation Physique</h4>
+                                <p class="text-gray-400">Analyse de votre condition physique actuelle</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-brand-red rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-dumbbell text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold mb-1">Plan Personnalisé</h4>
+                                <p class="text-gray-400">Création d'un programme adapté à vos besoins</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36" alt="Client Satisfait" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <p class="text-gray-300 italic mb-2">"Depuis que j'ai commencé à m'entraîner avec GymTracker, j'ai transformé ma condition physique et ma confiance en moi."</p>
+                            <p class="text-white font-semibold">Pierre Dupont, client depuis 2 ans</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 bg-white p-8 rounded-xl shadow-2xl">
+                    <h3 class="text-2xl font-bold mb-6 text-brand-dark">Formulaire de Réservation</h3>
+                    <form>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="firstName" class="block text-gray-700 mb-2">Prénom</label>
+                                <input type="text" id="firstName" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red">
+                            </div>
+                            <div>
+                                <label for="lastName" class="block text-gray-700 mb-2">Nom</label>
+                                <input type="text" id="lastName" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="email" class="block text-gray-700 mb-2">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="phone" class="block text-gray-700 mb-2">Téléphone</label>
+                            <input type="tel" id="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="trainer" class="block text-gray-700 mb-2">Entraîneur souhaité</label>
+                            <select id="trainer" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red">
+                                <option value="">Choisir un entraîneur</option>
+                                <option value="thomas">Thomas Laurent</option>
+                                <option value="sarah">Sarah Dubois</option>
+                                <option value="marc">Marc Renaud</option>
+                                <option value="emma">Emma Martin</option>
+                                <option value="lucas">Lucas Bernard</option>
+                                <option value="julie">Julie Moreau</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="date" class="block text-gray-700 mb-2">Date souhaitée</label>
+                            <input type="date" id="date" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 mb-2">Votre objectif</label>
+                            <textarea id="message" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red" placeholder="Décrivez brièvement votre objectif sportif..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-brand-red hover:bg-red-700 text-white py-3 px-6 rounded-lg font-semibold transition duration-300">Réserver ma séance</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-brand-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h5 class="text-brand-red font-semibold mb-2 tracking-wider">TÉMOIGNAGES</h5>
+                <h2 class="text-3xl font-bold mb-4 text-brand-dark">Ce Que Disent Nos Clients</h2>
+                <p class="max-w-2xl mx-auto text-gray-600">Découvrez les expériences et les résultats obtenus par nos clients grâce à nos entraîneurs.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic">"Grâce à Sarah, j'ai perdu 15 kg en 6 mois tout en me musclant. Ses programmes HIIT sont intensifs mais efficaces, et elle sait adapter chaque séance à mon niveau."</p>
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2" alt="Marie Lambert" class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-semibold text-brand-dark">Marie Lambert</h4>
+                            <p class="text-sm text-gray-500">Cliente depuis 8 mois</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic">"Thomas est un coach exceptionnel qui m'a aidé à atteindre des niveaux de force que je n'aurais jamais imaginés. Sa connaissance en musculation et sa patience font toute la différence."</p>
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="Antoine Dubois" class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-semibold text-brand-dark">Antoine Dubois</h4>
+                            <p class="text-sm text-gray-500">Client depuis 1 an</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic">"Les séances de yoga avec Emma ont complètement transformé ma vie. Non seulement j'ai gagné en souplesse, mais mon stress a considérablement diminué. Je recommande à 100% !"</p>
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4" alt="Sophie Martin" class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-semibold text-brand-dark">Sophie Martin</h4>
+                            <p class="text-sm text-gray-500">Cliente depuis 6 mois</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center mt-12">
+                <a href="#" class="bg-brand-red hover:bg-red-700 text-white py-3 px-8 rounded-lg font-semibold transition duration-300 inline-flex items-center">
+                    <span>Voir plus de témoignages</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h5 class="text-brand-red font-semibold mb-2 tracking-wider">QUESTIONS FRÉQUENTES</h5>
+                <h2 class="text-3xl font-bold mb-4 text-brand-dark">Tout Ce Que Vous Devez Savoir</h2>
+                <p class="max-w-2xl mx-auto text-gray-600">Retrouvez les réponses aux questions les plus fréquemment posées sur nos entraîneurs et nos services.</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto">
+                <!-- FAQ Item 1 -->
+                <div class="mb-6 border-b border-gray-200 pb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-brand-dark">Comment choisir le bon entraîneur pour mes objectifs ?</h3>
+                    <p class="text-gray-600">Nous vous recommandons de consulter les spécialités de chaque entraîneur et de choisir celui dont l'expertise correspond le mieux à vos objectifs. Vous pouvez également réserver une séance d'évaluation où nous vous aiderons à trouver l'entraîneur idéal pour vous.</p>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="mb-6 border-b border-gray-200 pb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-brand-dark">Quelles sont les qualifications de vos entraîneurs ?</h3>
+                    <p class="text-gray-600">Tous nos entraîneurs sont certifiés dans leurs domaines respectifs et possèdent au minimum 3 ans d'expérience professionnelle. Nous sélectionnons rigoureusement nos coachs pour leur expertise, leur pédagogie et leur capacité à accompagner chaque client vers ses objectifs.</p>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="mb-6 border-b border-gray-200 pb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-brand-dark">Combien coûte une séance d'entraînement ?</h3>
+                    <p class="text-gray-600">Les tarifs varient selon l'entraîneur et le type de programme choisi. Une séance individuelle commence à partir de 45€, et nous proposons des forfaits avantageux pour des séances régulières. Contactez-nous pour obtenir un devis personnalisé adapté à vos besoins.</p>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="mb-6 border-b border-gray-200 pb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-brand-dark">Puis-je annuler ou reporter une séance ?</h3>
+                    <p class="text-gray-600">Oui, vous pouvez annuler ou reporter une séance jusqu'à 24 heures avant l'heure prévue sans frais. Pour toute annulation tardive, la séance sera facturée à 50% de son prix. Veuillez nous contacter dès que possible pour tout changement.</p>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-3 text-brand-dark">Les entraîneurs proposent-ils des programmes à distance ?</h3>
+                    <p class="text-gray-600">Absolument ! La plupart de nos entraîneurs proposent un suivi à distance avec des programmes personnalisés, des séances vidéo et un suivi régulier par notre application. C'est une excellente option si vous ne pouvez pas vous déplacer régulièrement ou si vous préférez vous entraîner chez vous.</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <p class="text-gray-600 mb-6">Vous avez d'autres questions ? N'hésitez pas à nous contacter !</p>
+                <a href="#" class="bg-brand-red hover:bg-red-700 text-white py-3 px-8 rounded-lg font-semibold transition duration-300 inline-flex items-center">
+                    <i class="fas fa-envelope mr-2"></i>
+                    <span>Nous contacter</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-brand-dark relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full opacity-10">
+            <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd" alt="Background" class="w-full h-full object-cover">
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl">
+                <h5 class="text-brand-red font-semibold mb-4 tracking-wider">PRÊT À COMMENCER ?</h5>
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-6 text-white text-shadow leading-tight">TRANSFORMEZ VOTRE <span class="text-brand-red">CORPS</span> ET VOTRE <span class="text-brand-red">VIE</span> DÈS AUJOURD'HUI</h2>
+                <p class="text-lg mb-10 text-gray-300 max-w-xl">Rejoignez GymTracker et laissez nos entraîneurs professionnels vous guider vers une meilleure version de vous-même.</p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#booking" class="btn-primary bg-brand-red hover:bg-red-700 transition duration-500 py-3 px-8 rounded-lg font-semibold text-white uppercase tracking-wide text-center">Réserver maintenant</a>
+                    <a href="#" class="border-2 border-white hover:border-brand-red hover:text-brand-red transition duration-300 py-3 px-8 rounded-lg font-semibold text-white uppercase tracking-wide text-center">Nos programmes</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endsection
+    
