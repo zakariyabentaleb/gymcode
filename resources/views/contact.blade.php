@@ -86,28 +86,7 @@
 
 <body class="bg-brand-light font-sans">
     <!-- Navigation -->
-    <nav class="bg-brand-dark text-white shadow-lg fixed w-full z-50">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center space-x-2">
-                    <i class="fas fa-dumbbell text-brand-red text-2xl"></i>
-                    <span class="font-bold text-xl tracking-wider">GYM<span class="text-brand-red">TRACKER</span></span>
-                </div>
-                <div class="hidden md:flex items-center space-x-10">
-                    <a href="{{route('home')}}" class="nav-link hover:text-brand-red transition duration-300 font-medium">Accueil</a>
-                    <a href="{{route('programmes')}}" class="nav-link hover:text-brand-red transition duration-300 font-medium">Programmes</a>
-                    <a href="{{route('entraineur')}}" class="nav-link hover:text-brand-red transition duration-300 font-medium">Entraîneurs</a>
-                    <a href="{{route('contact')}}" class="nav-link text-brand-red font-medium">Contact</a>
-                    <a href="#" class="bg-brand-red hover:bg-red-700 transition duration-300 py-2 px-6 rounded-lg font-semibold">Se connecter</a>
-                </div>
-                <div class="md:hidden">
-                    <button class="text-white focus:outline-none">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>
+   
 
     <!-- Hero Section -->
     <section class="relative contact-hero-pattern pt-20">

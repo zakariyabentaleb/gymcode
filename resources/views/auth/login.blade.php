@@ -97,7 +97,7 @@
                     <p class="text-gray-600 mt-2">Accédez à votre compte et reprenez l'entraînement</p>
                 </div>
 
-                <form action="" method="POST" class="space-y-6">
+                <form action="{{ route('login') }}" method="POST" class="space-y-6">
                     @csrf
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>

@@ -11,7 +11,15 @@
                 <a href="{{ route('programmes') }}" class="nav-link {{ request()->routeIs('programmes') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Programmes</a>
                 <a href="{{ route('entraineur') }}" class="nav-link {{ request()->routeIs('entraineur') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Entraîneurs</a>
                 <a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Contact</a>
+                @auth
+                <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Mon Dashboard</a>
+                <form method="POST" action="{{ route('logout') }}" class="inline">
+                    @csrf
+                    <button type="submit" class="bg-brand-red hover:bg-red-700 transition duration-300 py-2 px-6 rounded-lg font-semibold">Déconnexion</button>
+                </form>
+            @else
                 <a href="{{ route('login') }}" class="bg-brand-red hover:bg-red-700 transition duration-300 py-2 px-6 rounded-lg font-semibold">Se connecter</a>
+            @endauth
             </div>
             <div class="md:hidden">
                 <button class="text-white focus:outline-none" id="mobile-menu-button">
@@ -26,9 +34,18 @@
                 <a href="{{ route('programmes') }}" class="{{ request()->routeIs('programmes') ? 'text-brand-red' : 'text-white' }} font-medium">Programmes</a>
                 <a href="{{ route('entraineur') }}" class="{{ request()->routeIs('entraineur') ? 'text-brand-red' : 'text-white' }} font-medium">Entraîneurs</a>
                 <a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'text-brand-red' : 'text-white' }} font-medium">Contact</a>
-                <a href="{{ route('login') }}" class="bg-brand-red hover:bg-red-700 inline-block text-center transition duration-300 py-2 px-6 rounded-lg font-semibold text-white">Se connecter</a>
+                @auth
+                <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Mon Dashboard</a>
+                <form method="POST" action="{{ route('logout') }}" class="inline">
+                    @csrf
+                    <button type="submit" class="bg-brand-red hover:bg-red-700 transition duration-300 py-2 px-6 rounded-lg font-semibold">Déconnexion</button>
+                </form>
+            @else
+                <a href="{{ route('login') }}" class="bg-brand-red hover:bg-red-700 transition duration-300 py-2 px-6 rounded-lg font-semibold">Se connecter</a>
+            @endauth
             </div>
         </div>
+       
     </div>
 </nav>
 

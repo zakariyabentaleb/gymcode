@@ -172,21 +172,31 @@
                 <!-- Progress Stepper -->
                
 
-                <form action="" method="POST" class="space-y-6">
+                <form action="{{ route('register.submit') }}" method="POST" class="space-y-6">
                     @csrf
                     <!-- Step 1: Basic Information (visible) -->
                     <div id="step1" class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="first_name" class="block text-sm font-medium text-gray-700 mb-1">Prénom</label>
-                                <input id="first_name" name="first_name" type="text" required class="bg-white focus:ring-brand-red focus:border-brand-red block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm text-sm" placeholder="Jean">
-                            </div>
-                            <div>
-                                <label for="last_name" class="block text-sm font-medium text-gray-700 mb-1">Nom</label>
-                                <input id="last_name" name="last_name" type="text" required class="bg-white focus:ring-brand-red focus:border-brand-red block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm text-sm" placeholder="Dupont">
+                        <!-- Replaced First Name and Last Name with Full Name -->
+                        <div>
+                            <label for="full_name" class="block text-sm font-medium text-gray-700 mb-1">Nom complet</label>
+                            <input id="full_name" name="full_name" type="text" required class="bg-white focus:ring-brand-red focus:border-brand-red block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm text-sm" placeholder="Jean Dupont">
+                        </div>
+                
+                        <!-- Member or Trainer Selection -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Type de compte</label>
+                            <div class="flex space-x-6">
+                                <div class="flex items-center">
+                                    <input id="role_member" name="role" type="radio" value="member" checked class="h-4 w-4 text-brand-red focus:ring-brand-red border-gray-300">
+                                    <label for="role_member" class="ml-2 text-sm text-gray-700">Membre</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input id="role_trainer" name="role" type="radio" value="trainer" class="h-4 w-4 text-brand-red focus:ring-brand-red border-gray-300">
+                                    <label for="role_trainer" class="ml-2 text-sm text-gray-700">Coach</label>
+                                </div>
                             </div>
                         </div>
-
+                
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
                             <div class="relative">
@@ -196,7 +206,7 @@
                                 <input id="email" name="email" type="email" required class="bg-white focus:ring-brand-red focus:border-brand-red block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm text-sm" placeholder="exemple@email.com">
                             </div>
                         </div>
-
+                
                         <div>
                             <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Mot de passe</label>
                             <div class="relative">
@@ -212,7 +222,7 @@
                                 <span class="text-xs text-gray-500 ml-1">Force du mot de passe</span>
                             </div>
                         </div>
-
+                
                         <div>
                             <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">Confirmer le mot de passe</label>
                             <div class="relative">
@@ -222,7 +232,7 @@
                                 <input id="password_confirmation" name="password_confirmation" type="password" required class="bg-white focus:ring-brand-red focus:border-brand-red block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm text-sm" placeholder="Confirmez votre mot de passe">
                             </div>
                         </div>
-
+                
                         <div class="flex items-start">
                             <div class="flex items-center h-5">
                                 <input id="terms" name="terms" type="checkbox" required class="h-4 w-4 text-brand-red focus:ring-brand-red border-gray-300 rounded">
@@ -231,13 +241,12 @@
                                 <label for="terms" class="text-sm text-gray-700">J'accepte les <a href="#" class="text-brand-red hover:text-red-800">Conditions d'Utilisation</a> et la <a href="#" class="text-brand-red hover:text-red-800">Politique de Confidentialité</a></label>
                             </div>
                         </div>
-
+                
                         <div class="flex items-center justify-between mt-8">
                             <div></div>
-                            <button type="button" onclick="" class="btn-primary bg-brand-red hover:bg-red-700 transition duration-500 py-3 px-8 rounded-lg font-semibold text-white tracking-wide">register <i class="fas fa-arrow-right ml-2"></i></button>
+                            <button type="submit"  class="btn-primary bg-brand-red hover:bg-red-700 transition duration-500 py-3 px-8 rounded-lg font-semibold text-white tracking-wide">register <i class="fas fa-arrow-right ml-2"></i></button>
                         </div>
                     </div>
-
-                </form> 
+                </form>
            </div>  
     
