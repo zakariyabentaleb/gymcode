@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RegisterController;
 
 
 Route::get('/', function () {
@@ -24,10 +25,12 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::get('/dashboard', function () {
+Route::get('/admin-dashboard', function () {
     return view('admin.dashboard');
 })->name('admin-dashboard');
-
+Route::get('/program-dashboard', function () {
+    return view('admin.program');
+})->name('program-dashboard');
 
 Route::get('/user-dashboard', function () {
     return view('user.dashboard');
@@ -42,7 +45,7 @@ Route::get('/login', function () {
 // })->name('register');
 
 Route::get('/register', [UserController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [UserController::class, 'store'])->name('register.submit');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.submit');
 Route::post('/login', [UserController::class, 'login'])->name('loginn');
 
 Route::middleware('auth')->group(function () {

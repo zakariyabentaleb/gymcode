@@ -19,8 +19,8 @@ class trainerMiddleware
         if (Auth::user()->role === 'trainer'){
             return $next($request);
         }elseif(Auth::user()->role === 'Member'){
-            return redirect()->route('clients.index');
+            return redirect()->route('home');
         }
-        return redirect()->route('developers.index');
+        return redirect()->route('home');
     }
 }

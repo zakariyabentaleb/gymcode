@@ -26,28 +26,28 @@ class UserController extends Controller
 
    
   
-    public function store(Request $request)
-    {
-            $validated = $request->validate([
-                'full_name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required', 'confirmed', Password::defaults()],
-                'role' => ['required', Rule::in(['member', 'trainer'])],
-                'terms' => ['required', 'accepted'],
-            ]);
+    // public function store(Request $request)
+    // {
+    //         $validated = $request->validate([
+    //             'full_name' => ['required', 'string', 'max:255'],
+    //             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+    //             'password' => ['required', 'confirmed', Password::defaults()],
+    //             'role' => ['required', Rule::in(['member', 'trainer'])],
+    //             'terms' => ['required', 'accepted'],
+    //         ]);
     
-            $user = User::create([
-                'full_name' => $validated['full_name'],
-                'email' => $validated['email'],
-                'password' => Hash::make($validated['password']),
-                'role' => $validated['role'],
-                'terms_accepted' => true,
-            ]);
+    //         $user = User::create([
+    //             'full_name' => $validated['full_name'],
+    //             'email' => $validated['email'],
+    //             'password' => Hash::make($validated['password']),
+    //             'role' => $validated['role'],
+    //             'terms_accepted' => true,
+    //         ]);
     
-            Auth::login($user);
+    //         Auth::login($user);
     
-            return redirect()->route('home')->with('success', 'Compte créé avec succès!');
-     }
+    //         return redirect()->route('home')->with('success', 'Compte créé avec succès!');
+    //  }
     
      public function login(Request $request)
      {

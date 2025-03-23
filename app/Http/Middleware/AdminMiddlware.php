@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class MiddlewareAuth
+class  AdminMiddlware
 {
     /**
      * Handle an incoming request.
@@ -20,8 +20,8 @@ class MiddlewareAuth
         if (Auth::user()->role === 'admin'){
             return $next($request);
         }elseif(Auth::user()->role === 'Member'){
-            return redirect()->route('clients.index');
+            return redirect()->route('home');
         }
-        return redirect()->route('developers.index');
+        return redirect()->route('home');
     }
 }

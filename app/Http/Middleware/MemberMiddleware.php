@@ -19,8 +19,8 @@ class MemberMiddleware
         if (Auth::user()->role === 'Member'){
             return $next($request);
         }elseif(Auth::user()->role === 'admin'){
-            return redirect()->route('clients.index');
+            return redirect()->route('admin-dashboard');
         }
-        return redirect()->route('developers.index');
+        return redirect()->route('home');
     }
 }
