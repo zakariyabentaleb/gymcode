@@ -163,6 +163,12 @@
                                         <label for="image_url" class="block text-sm font-medium text-gray-700 mb-1">URL de l'image *</label>
                                         <input type="text" id="image_url" name="image_url" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Collez le lien de l'image ici" oninput="previewImageFromURL(event)">
                                     </div>
+                                    <div>
+                                        <label for="duree" class="block text-sm font-medium text-gray-700 mb-1">Durée (semaines) *</label>
+                                        <input type="number" id="duree" name="duree" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                                               placeholder="Ex: 8" min="1" required>
+                                    </div>
+                                    
                                     
                                 </div>
                             </div>
@@ -182,15 +188,24 @@
                                             
                                         </div>
                                     </div>
-                                    <div class="flex justify-end">
-                                        <button type="button" class="flex items-center text-red-500 hover:text-red-600">
-                                            <i class="fas fa-plus mr-1"></i>
-                                            <span>Ajouter d'autres entraîneurs</span>
-                                        </button>
+                                </div>
+                            </div>
+                            <div class="mb-8">
+                                <h3 class="text-lg font-medium text-gray-800 mb-4">Categories</h3>
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <div class="mb-4">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Sélectionnez Category pour ce programme</label>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <select id="category_id" name="category_id" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                                                @foreach ($categories as $categorie)
+                                                    <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
                             <!-- Pricing Section -->
                             <div class="mb-8">
                                 <h3 class="text-lg font-medium text-gray-800 mb-4">Prix</h3>

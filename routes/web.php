@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RegisterController;
@@ -29,9 +30,9 @@ Route::get('/contact', function () {
 Route::get('/admin-dashboard', function () {
     return view('admin.dashboard');
 })->name('admin-dashboard');
-Route::get('/program-dashboard', function () {
-    return view('admin.program');
-})->name('program-dashboard');
+// Route::get('/program-dashboard', function () {
+//     return view('admin.program');
+// })->name('program-dashboard');
 
 Route::get('/user-dashboard', function () {
     return view('user.dashboard');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Program;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class ProgramController extends Controller
 {
@@ -12,8 +13,14 @@ class ProgramController extends Controller
     {
         $programs = Program::all();
         $totalprogram = Program::count();
-       
-        return view('admin.program', compact('programs', 'totalprogram'));
+
+        $categories = Category::all();
+        
+        $progCategory = Program::with('category')->get();
+
+        //  dd($progCategory->category->name);
+
+        return view('admin.program', compact('programs', 'totalprogram','categories','progCategory'));
     }
    
    
@@ -26,7 +33,7 @@ class ProgramController extends Controller
     public function store(Request $request)
     {
         // Vérifier si les données arrivent correctement
-        // dd($request->all());
+        //  dd($request->all());
     
         // Validation des données
         $prog = $request->validate([
@@ -37,15 +44,16 @@ class ProgramController extends Controller
             'duree' => 'required|integer|min:1|max:40',
             'image_url' => 'required|url',
             'trainer_id' => 'required|exists:trainers,id',
+            'category_id'=> 'required|exists:categories,id',
         ]);
     
         // Vérification après validation
-        // dd($prog);
+        //  dd($prog);
     
         // Insertion en base
         Program::create($prog);
     
-        return redirect()->route('program-dashboard')->with('success', 'Programme ajouté avec succès.');
+        return redirect()->route('programs.store')->with('success', 'Programme ajouté avec succès.');
     }
     
     

@@ -144,7 +144,7 @@
                             <span class="text-3xl font-bold text-gray-800">87</span>
                             <div class="w-10 h-10 ml-auto bg-green-500 text-white rounded-full flex items-center justify-center">
                                 <i class="fas fa-user-plus"></i>
-                            </div>
+                            </div   >
                         </div>
                     </div>
 
@@ -170,7 +170,7 @@
                             <div class="w-10 h-10 ml-auto bg-red-500 text-white rounded-full flex items-center justify-center">
                                 <i class="fas fa-euro-sign"></i>
                             </div>
-                        </div>
+                        </div>  
                     </div>
                 </div>
 
@@ -208,10 +208,10 @@
                                             </td>
 
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Musculation</span>
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">{{$program->category->name}}</span>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm text-gray-500">8 semaines</div>
+                                                <div class="text-sm text-gray-500">{{$program->duree}} semaines</div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="text-sm font-medium">{{$program->price}} €</div>
@@ -248,26 +248,20 @@
                             <i class="fas fa-plus mr-2"></i>Nouvelle catégorie
                         </button>
                     </div>
+                
                     <div class="p-6">
+                       
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-                            <div class="bg-gray-50 rounded-lg p-4 text-center">
-                                <div class="h-12 w-12 bg-blue-500 mx-auto rounded-full flex items-center justify-center text-white mb-3">
-                                    <i class="fas fa-dumbbell"></i>
+                            @foreach ($categories as $categorie)
+                                <div class="bg-gray-50 rounded-lg p-4 text-center">
+                                    <div class="h-12 w-12 bg-blue-500 mx-auto rounded-full flex items-center justify-center text-white mb-3">
+                                        <i class="fas fa-dumbbell"></i>
+                                    </div>
+                                    <h3 class="font-medium text-gray-800">{{$categorie->name}}</h3>
+                                    <p class="text-sm text-gray-500 mt-1">8 programmes</p>
                                 </div>
-                                <h3 class="font-medium text-gray-800">Musculation</h3>
-                                <p class="text-sm text-gray-500 mt-1">8 programmes</p>
-                            </div>
-                            
-                            <div class="bg-gray-50 rounded-lg p-4 text-center">
-                                <div class="h-12 w-12 bg-green-500 mx-auto rounded-full flex items-center justify-center text-white mb-3">
-                                    <i class="fas fa-running"></i>
-                                </div>
-                                <h3 class="font-medium text-gray-800">Cardio</h3>
-                                <p class="text-sm text-gray-500 mt-1">6 programmes</p>
-                            </div>
-                            
-                            <div class="bg-gray-50 rounded-lg p-4 text-center">
-                                <div class="h-12 w-12 bg-purple-500 mx-auto rounded-full flex items-center justify-center text-white mb-3">
-                                    <i class="fas fa-spa"></i>
-                                </div>
-                                <h3 class="font-medium text-gray-800">Yoga</h3>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Trainer;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class EntraineurController extends Controller
@@ -12,7 +13,8 @@ class EntraineurController extends Controller
        
         $trainers = Trainer::all();
           
+        $categories = Category::all();
         
-        return view('admin.create-program', compact('trainers'));
+        return view('admin.create-program', compact('trainers','categories'));
     }
 }
