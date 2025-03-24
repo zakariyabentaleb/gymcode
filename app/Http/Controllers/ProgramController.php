@@ -11,9 +11,11 @@ class ProgramController extends Controller
     public function index()
     {
         $programs = Program::all();
-        return view('programs.index', compact('programs'));
+        $totalprogram = Program::count();
+       
+        return view('admin.program', compact('programs', 'totalprogram'));
     }
-
+   
    
     public function create()
     {
@@ -23,18 +25,29 @@ class ProgramController extends Controller
     
     public function store(Request $request)
     {
-        $request->validate([
+        // Vérifier si les données arrivent correctement
+        // dd($request->all());
+    
+        // Validation des données
+        $prog = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'level' => 'required|in:debutant,intermediaire,professionel',
             'price' => 'required|numeric|min:0',
             'image_url' => 'required|url',
+            'trainer_id' => 'required|exists:trainers,id',
         ]);
-
-        Program::create($request->all());
-
-        return redirect()->route('programs.index')->with('success', 'Programme ajouté avec succès.');
+    
+        // Vérification après validation
+        // dd($prog);
+    
+        // Insertion en base
+        Program::create($prog);
+    
+        return redirect()->route('program-dashboard')->with('success', 'Programme ajouté avec succès.');
     }
+    
+    
 
    
     public function show(Program $program)
@@ -57,6 +70,7 @@ class ProgramController extends Controller
             'level' => 'required|in:debutant,intermediaire,professionel',
             'price' => 'required|numeric|min:0',
             'image_url' => 'required|url',
+            'trainer_id' => 'required|exists:trainers,id',
         ]);
 
         $program->update($request->all());

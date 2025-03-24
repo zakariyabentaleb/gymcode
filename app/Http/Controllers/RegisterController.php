@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Entraineur;
+use App\Models\Trainer;
 use App\Models\Membre;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,7 +24,7 @@ class RegisterController extends Controller
 
        
         if ($validated['role'] === 'trainer') {
-            $user = Entraineur::create([
+            $user = Trainer::create([
                 'full_name' => $validated['full_name'],
                 'email' => $validated['email'],
                 'password' => Hash::make($validated['password']),
@@ -32,7 +32,7 @@ class RegisterController extends Controller
                 'terms_accepted' => true,
             ]);
         } else {
-            $user = Membre::create([
+            $user = User::create([
                 'full_name' => $validated['full_name'],
                 'email' => $validated['email'],
                 'password' => Hash::make($validated['password']),

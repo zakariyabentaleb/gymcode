@@ -17,8 +17,18 @@ class Program extends Model
         'level',
         'price',
         'image_url',
+        'trainer_id',
     ];
 
+    public function trainer()
+    {
+        return $this->belongsTo(Trainer::class);
+    }
+    
+    public function category()
+    {
+    return $this->belongsTo(Category::class);
+    } 
    
     
 }

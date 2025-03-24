@@ -113,9 +113,12 @@
                         <h1 class="text-2xl font-bold text-gray-800">Gestion des Programmes</h1>
                         <p class="text-gray-600">Créez et gérez les programmes d'entraînement</p>
                     </div>
-                    <button class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-300">
-                        <i class="fas fa-plus mr-2"></i>Nouveau Programme
-                    </button>
+                    <a href="{{ route('create-program') }}">
+                        <button class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-300">
+                            <i class="fas fa-plus mr-2"></i>Nouveau Programme
+                        </button>
+                    </a>
+                    
                 </div>
 
                 <!-- Stats Cards -->
@@ -125,7 +128,7 @@
                             <h3 class="text-gray-500 text-sm font-medium">Total Programmes</h3>
                         </div>
                         <div class="flex items-center">
-                            <span class="text-3xl font-bold text-gray-800">24</span>
+                            <span class="text-3xl font-bold text-gray-800">{{$totalprogram}}</span>
                             <div class="w-10 h-10 ml-auto bg-blue-500 text-white rounded-full flex items-center justify-center">
                                 <i class="fas fa-dumbbell"></i>
                             </div>
@@ -171,20 +174,11 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <div class="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-8">
                     <!-- Program List -->
                     <div class="lg:col-span-2 bg-white rounded-lg shadow">
                         <div class="p-6 border-b border-gray-200 flex justify-between items-center">
                             <h2 class="text-lg font-semibold text-gray-800">Liste des programmes</h2>
-                            <div>
-                                <select class="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                                    <option>Tous les types</option>
-                                    <option>Musculation</option>
-                                    <option>Cardio</option>
-                                    <option>Yoga</option>
-                                    <option>Pilates</option>
-                                </select>
-                            </div>
                         </div>
                         <div class="p-6">
                             <div class="overflow-x-auto">
@@ -199,6 +193,7 @@
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
+                                        @foreach ($programs as $program)
                                         <tr>
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
@@ -206,11 +201,12 @@
                                                         <i class="fas fa-dumbbell"></i>
                                                     </div>
                                                     <div class="ml-4">
-                                                        <div class="text-sm font-medium text-gray-900">Force & Endurance</div>
+                                                        <div class="text-sm font-medium text-gray-900">{{$program->title}}</div>
                                                         <div class="text-xs text-gray-500">Par Jean Martin</div>
                                                     </div>
                                                 </div>
                                             </td>
+
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Musculation</span>
                                             </td>
@@ -218,7 +214,7 @@
                                                 <div class="text-sm text-gray-500">8 semaines</div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm font-medium">89,00 €</div>
+                                                <div class="text-sm font-medium">{{$program->price}} €</div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                 <button class="text-blue-500 hover:text-blue-700 mr-3">
@@ -229,232 +225,19 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                    <div class="h-10 w-10 rounded-full bg-green-500 flex items-center justify-center text-white">
-                                                        <i class="fas fa-running"></i>
-                                                    </div>
-                                                    <div class="ml-4">
-                                                        <div class="text-sm font-medium text-gray-900">30 Jours Cardio</div>
-                                                        <div class="text-xs text-gray-500">Par Sophie Dubois</div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Cardio</span>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm text-gray-500">4 semaines</div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm font-medium">59,00 €</div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                <button class="text-blue-500 hover:text-blue-700 mr-3">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="text-red-500 hover:text-red-700">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                    <div class="h-10 w-10 rounded-full bg-purple-500 flex items-center justify-center text-white">
-                                                        <i class="fas fa-spa"></i>
-                                                    </div>
-                                                    <div class="ml-4">
-                                                        <div class="text-sm font-medium text-gray-900">Yoga Débutant</div>
-                                                        <div class="text-xs text-gray-500">Par Marie Leclerc</div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">Yoga</span>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm text-gray-500">6 semaines</div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm font-medium">49,00 €</div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                <button class="text-blue-500 hover:text-blue-700 mr-3">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="text-red-500 hover:text-red-700">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                    <div class="h-10 w-10 rounded-full bg-yellow-500 flex items-center justify-center text-white">
-                                                        <i class="fas fa-fire-alt"></i>
-                                                    </div>
-                                                    <div class="ml-4">
-                                                        <div class="text-sm font-medium text-gray-900">HIIT Intensif</div>
-                                                        <div class="text-xs text-gray-500">Par Paul Blanc</div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">HIIT</span>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm text-gray-500">4 semaines</div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm font-medium">69,00 €</div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                <button class="text-blue-500 hover:text-blue-700 mr-3">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="text-red-500 hover:text-red-700">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
+                                        @endforeach
+                                        
+                                       
+                                       
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="mt-6 flex justify-between">
-                                <a href="#" class="text-red-500 text-sm font-medium hover:text-red-600">Voir tous les programmes →</a>
-                                <div class="flex space-x-2">
-                                    <button class="px-3 py-1 border border-gray-300 rounded-md">1</button>
-                                    <button class="px-3 py-1 border border-gray-300 rounded-md bg-red-500 text-white">2</button>
-                                    <button class="px-3 py-1 border border-gray-300 rounded-md">3</button>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
 
                     <!-- Program Stats -->
-                    <div class="bg-white rounded-lg shadow">
-                        <div class="p-6 border-b border-gray-200">
-                            <h2 class="text-lg font-semibold text-gray-800">Statistiques des programmes</h2>
-                        </div>
-                        <div class="p-6">
-                            <div class="mb-6">
-                                <h3 class="text-sm font-medium text-gray-500 mb-2">Répartition par catégorie</h3>
-                                <div class="space-y-2">
-                                    <div>
-                                        <div class="flex justify-between mb-1">
-                                            <span class="text-sm font-medium">Musculation</span>
-                                            <span class="text-sm font-medium">35%</span>
-                                        </div>
-                                        <div class="w-full bg-gray-200 rounded-full h-2">
-                                            <div class="bg-blue-500 h-2 rounded-full" style="width: 35%"></div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between mb-1">
-                                            <span class="text-sm font-medium">Cardio</span>
-                                            <span class="text-sm font-medium">25%</span>
-                                        </div>
-                                        <div class="w-full bg-gray-200 rounded-full h-2">
-                                            <div class="bg-green-500 h-2 rounded-full" style="width: 25%"></div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between mb-1">
-                                            <span class="text-sm font-medium">Yoga</span>
-                                            <span class="text-sm font-medium">20%</span>
-                                        </div>
-                                        <div class="w-full bg-gray-200 rounded-full h-2">
-                                            <div class="bg-purple-500 h-2 rounded-full" style="width: 20%"></div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between mb-1">
-                                            <span class="text-sm font-medium">HIIT</span>
-                                            <span class="text-sm font-medium">15%</span>
-                                        </div>
-                                        <div class="w-full bg-gray-200 rounded-full h-2">
-                                            <div class="bg-yellow-500 h-2 rounded-full" style="width: 15%"></div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between mb-1">
-                                            <span class="text-sm font-medium">Pilates</span>
-                                            <span class="text-sm font-medium">5%</span>
-                                        </div>
-                                        <div class="w-full bg-gray-200 rounded-full h-2">
-                                            <div class="bg-red-500 h-2 rounded-full" style="width: 5%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mb-6">
-                                <h3 class="text-sm font-medium text-gray-500 mb-4">Inscriptions mensuelles</h3>
-                                <div class="h-40 flex items-end space-x-2">
-                                    <div class="flex-1 flex flex-col items-center">
-                                        <div class="w-full bg-blue-500 rounded-t-sm" style="height: 25%"></div>
-                                        <span class="text-xs mt-1">Jan</span>
-                                    </div>
-                                    <div class="flex-1 flex flex-col items-center">
-                                        <div class="w-full bg-blue-500 rounded-t-sm" style="height: 40%"></div>
-                                        <span class="text-xs mt-1">Fév</span>
-                                    </div>
-                                    <div class="flex-1 flex flex-col items-center">
-                                        <div class="w-full bg-blue-500 rounded-t-sm" style="height: 60%"></div>
-                                        <span class="text-xs mt-1">Mar</span>
-                                    </div>
-                                    <div class="flex-1 flex flex-col items-center">
-                                        <div class="w-full bg-blue-500 rounded-t-sm" style="height: 45%"></div>
-                                        <span class="text-xs mt-1">Avr</span>
-                                    </div>
-                                    <div class="flex-1 flex flex-col items-center">
-                                        <div class="w-full bg-blue-500 rounded-t-sm" style="height: 50%"></div>
-                                        <span class="text-xs mt-1">Mai</span>
-                                    </div>
-                                    <div class="flex-1 flex flex-col items-center">
-                                        <div class="w-full bg-blue-500 rounded-t-sm" style="height: 75%"></div>
-                                        <span class="text-xs mt-1">Jui</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <h3 class="text-sm font-medium text-gray-500 mb-4">Meilleurs entraîneurs</h3>
-                                <div class="space-y-4">
-                                    <div class="flex items-center">
-                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Trainer" class="w-8 h-8 rounded-full">
-                                        <div class="ml-3 flex-1">
-                                            <p class="font-medium text-sm">Jean Martin</p>
-                                            <p class="text-xs text-gray-500">8 programmes</p>
-                                        </div>
-                                        <div class="flex text-yellow-400 text-xs">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="Trainer" class="w-8 h-8 rounded-full">
-                                        <div class="ml-3 flex-1">
-                                            <p class="font-medium text-sm">Marie Leclerc</p>
-                                            <p class="text-xs text-gray-500">6 programmes</p>
-                                        </div>
-                                        <div class="flex text-yellow-400 text-xs">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
 
                 <!-- Program Categories -->

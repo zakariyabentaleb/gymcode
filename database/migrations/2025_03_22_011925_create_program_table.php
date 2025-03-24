@@ -18,13 +18,13 @@ return new class extends Migration
             $table->enum('level', ['debutant','intermediaire', 'professionel'])->default('debutant');
             $table->decimal('price', 8, 2); 
             $table->string('image_url'); 
-            $table->timestamps();
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+            $table->foreignId('trainer_id')->constrained('trainers')->onDelete('cascade'); 
+            $table->timestamps();  
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+    
     public function down(): void
     {
         Schema::dropIfExists('program');

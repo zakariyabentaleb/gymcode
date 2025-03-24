@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RegisterController;
-
+use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\EntraineurController;
 
 Route::get('/', function () {
     return view('home');
@@ -40,9 +41,10 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
-// Route::get('/register', function () {
-//     return view('auth.register');
-// })->name('register');
+// Route::get('/create-program', function () {
+//     return view('admin.create-program');
+// })->name('create-program');
+
 
 Route::get('/register', [UserController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.submit');
@@ -66,3 +68,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 });
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/programs', [ProgramController::class, 'index'])->name('programs.index');
+    Route::get('/programs/create', [ProgramController::class, 'create'])->name('programs.create');
+    Route::post('/programs', [ProgramController::class, 'store'])->name('programs.store');
+    Route::get('/programs/{program}', [ProgramController::class, 'show'])->name('programs.show');
+    Route::get('/programs/{program}/edit', [ProgramController::class, 'edit'])->name('programs.edit');
+    Route::put('/programs/{program}', [ProgramController::class, 'update'])->name('programs.update');
+    Route::delete('/programs/{program}', [ProgramController::class, 'destroy'])->name('programs.destroy');
+});
+
+Route::get('/create-program', [EntraineurController::class, 'index'])->name('create-program');
