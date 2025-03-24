@@ -216,14 +216,22 @@
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="text-sm font-medium">{{$program->price}} €</div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                <button class="text-blue-500 hover:text-blue-700 mr-3">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 flex items-center space-x-3">
+                                              
+                                                <a href="{{ route('programs.edit', $program->id) }}" class="text-blue-500 hover:text-blue-700">
                                                     <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="text-red-500 hover:text-red-700">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
+                                                </a>
+                                            
+                                               
+                                                <form action="{{ route('programs.destroy', $program->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="text-red-500 hover:text-red-700">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
                                             </td>
+                                            
                                         </tr>
                                         @endforeach
                                         
