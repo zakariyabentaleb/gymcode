@@ -34,6 +34,7 @@ class ProgramController extends Controller
             'description' => 'required|string',
             'level' => 'required|in:debutant,intermediaire,professionel',
             'price' => 'required|numeric|min:0',
+            'duree' => 'required|integer|min:1|max:40',
             'image_url' => 'required|url',
             'trainer_id' => 'required|exists:trainers,id',
         ]);

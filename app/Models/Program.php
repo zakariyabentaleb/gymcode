@@ -18,6 +18,7 @@ class Program extends Model
         'price',
         'image_url',
         'trainer_id',
+        'duree',
     ];
 
     public function trainer()

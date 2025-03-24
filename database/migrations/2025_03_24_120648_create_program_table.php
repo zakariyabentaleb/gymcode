@@ -20,11 +20,11 @@ return new class extends Migration
             $table->string('image_url'); 
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->foreignId('trainer_id')->constrained('trainers')->onDelete('cascade'); 
+            $table->integer('duree')->default(1);
             $table->timestamps();  
         });
     }
 
-    
     public function down(): void
     {
         Schema::dropIfExists('program');
