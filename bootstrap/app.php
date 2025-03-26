@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
+
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
@@ -11,7 +12,16 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\AdminMiddlware::class,
+            'client' => \App\Http\Middleware\MemberMiddleware::class,
+            'developer' => \App\Http\Middleware\trainerMiddleware::class,
+        ]);
+        $middleware->redirectUsersTo(fn ($user) => match ($user->role) {
+            'admin' => 'admin-dashboard',
+            'member' => 'clients.index',
+            'trainer' => 'developer.index',
+        });
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

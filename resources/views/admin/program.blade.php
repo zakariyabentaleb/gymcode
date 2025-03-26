@@ -21,7 +21,7 @@
                 <div class="flex items-center space-x-3 mb-6">
                     <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Admin" class="w-10 h-10 rounded-full">
                     <div>
-                        <p class="font-medium">Admin</p>
+                        <p class="font-medium">{{ Auth::user()->full_name }}</p>
                         <p class="text-xs text-gray-400">Super Administrateur</p>
                     </div>
                 </div>

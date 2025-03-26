@@ -27,9 +27,7 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::get('/admin-dashboard', function () {
-    return view('admin.dashboard');
-})->name('admin-dashboard');
+
 // Route::get('/program-dashboard', function () {
 //     return view('admin.program');
 // })->name('program-dashboard');
@@ -71,7 +69,8 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['admin'])->group(function () {
+    Route::get('/admin-dashboard', function () { return view('admin.dashboard'); })->name('admin-dashboard');
     Route::get('/programs', [ProgramController::class, 'index'])->name('programs.index');
     Route::get('/programs/create', [ProgramController::class, 'create'])->name('programs.create');
     Route::post('/programs', [ProgramController::class, 'store'])->name('programs.store');
@@ -79,9 +78,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/programs/{program}/edit', [ProgramController::class, 'edit'])->name('programs.edit');
     Route::put('/programs/{program}', [ProgramController::class, 'update'])->name('programs.update');
     Route::delete('/programs/{program}', [ProgramController::class, 'destroy'])->name('programs.destroy');
+    Route::get('/create-program', [EntraineurController::class, 'index'])->name('create-program');
+    Route::get('/create-categories', [CategoryController::class, 'show'])->name('categories.create');
+    Route::post('/add-categories', [CategoryController::class, 'store'])->name('categories.store');
+    Route::delete('/categories/{categorie}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 });
 
-Route::get('/create-program', [EntraineurController::class, 'index'])->name('create-program');
-Route::get('/create-categories', [CategoryController::class, 'show'])->name('categories.create');
-Route::post('/add-categories', [CategoryController::class, 'store'])->name('categories.store');
-Route::delete('/categories/{categorie}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+
