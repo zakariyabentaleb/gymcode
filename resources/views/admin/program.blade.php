@@ -262,14 +262,23 @@
                        
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
                             @foreach ($categories as $categorie)
-                                <div class="bg-gray-50 rounded-lg p-4 text-center">
-                                    <div class="h-12 w-12 bg-blue-500 mx-auto rounded-full flex items-center justify-center text-white mb-3">
-                                        <i class="fas fa-dumbbell"></i>
-                                    </div>
-                                    <h3 class="font-medium text-gray-800">{{$categorie->name}}</h3>
-                                    <p class="text-sm text-gray-500 mt-1">{{$categorie->total}} programmes</p>
+                            <div class="bg-gray-50 rounded-lg p-4 text-center relative">
+                                <div class="h-12 w-12 bg-blue-500 mx-auto rounded-full flex items-center justify-center text-white mb-3">
+                                    <i class="fas fa-dumbbell"></i>
                                 </div>
-                            @endforeach
+                                <h3 class="font-medium text-gray-800">{{$categorie->name}}</h3>
+                                <p class="text-sm text-gray-500 mt-1">{{$categorie->total}} programmes</p>
+            
+                               
+                                <form action="{{ route('categories.destroy', $categorie->id) }}" method="POST" class="absolute top-2 right-2">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-500 hover:text-red-700">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        @endforeach
                         </div>
                     </div>
                 </div>
