@@ -252,9 +252,10 @@
                 <div class="bg-white rounded-lg shadow">
                     <div class="p-6 border-b border-gray-200 flex justify-between items-center">
                         <h2 class="text-lg font-semibold text-gray-800">Catégories de programmes</h2>
-                        <button class="px-4 py-2 bg-red-500 text-white rounded-lg text-sm hover:bg-red-600 transition duration-300">
+                        <a href="{{ route('categories.create') }}" class="px-4 py-2 bg-red-500 text-white rounded-lg text-sm hover:bg-red-600 transition duration-300">
                             <i class="fas fa-plus mr-2"></i>Nouvelle catégorie
-                        </button>
+                        </a>
+                        
                     </div>
                 
                     <div class="p-6">
@@ -266,10 +267,14 @@
                                         <i class="fas fa-dumbbell"></i>
                                     </div>
                                     <h3 class="font-medium text-gray-800">{{$categorie->name}}</h3>
-                                    <p class="text-sm text-gray-500 mt-1">8 programmes</p>
+                                    <p class="text-sm text-gray-500 mt-1">{{$categorie->total}} programmes</p>
                                 </div>
                             @endforeach
                         </div>
                     </div>
                 </div>
+   
+
+
+
                 

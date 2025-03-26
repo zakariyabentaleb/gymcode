@@ -82,3 +82,5 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/create-program', [EntraineurController::class, 'index'])->name('create-program');
+Route::get('/create-categories', [CategoryController::class, 'show'])->name('categories.create');
+Route::post('/add-categories', [CategoryController::class, 'store'])->name('categories.store');
