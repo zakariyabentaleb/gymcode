@@ -84,4 +84,4 @@ Route::middleware(['admin'])->group(function () {
     Route::delete('/categories/{categorie}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 });
 
-
+route::get('/trainers', [EntraineurController::class, 'show'])->name('trainer.show');
