@@ -85,3 +85,5 @@ Route::middleware(['admin'])->group(function () {
 });
 
 route::get('/trainers', [EntraineurController::class, 'show'])->name('trainer.show');
+Route::get('/create-trainer', function () { return view('admin.create-trainer');})->name('create-trainer');
+Route::post('/add-trainer', [EntraineurController::class, 'store'])->name('trainer.store');

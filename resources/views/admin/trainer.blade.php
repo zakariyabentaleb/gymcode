@@ -85,11 +85,11 @@
                         <h1 class="text-2xl font-bold text-gray-800">Gestion des Entraîneurs</h1>
                         <p class="text-gray-600">Créez et gérez les entraîneurs</p>
                     </div>
-                    {{-- <a href="{{ route('create-trainer') }}"> --}}
+                    <a href="{{ route('create-trainer') }}">
                         <button class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-300">
                             <i class="fas fa-plus mr-2"></i>Nouvel Entraîneur
                         </button>
-                    {{-- </a> --}}
+                    </a>
                 </div>
 
                 <!-- Trainer List -->

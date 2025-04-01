@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Trainer extends User
 {
-    protected $attributes = ['role' => 'trainer'];
+    // protected $attributes = ['role' => 'trainer'];
 
     use HasFactory;
 

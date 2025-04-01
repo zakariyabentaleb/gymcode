@@ -41,7 +41,7 @@ class EntraineurController extends Controller
         Trainer::create($trainer);
     
     
-        return redirect()->route('create-program');
+        return redirect()->route('trainer.show');
     }
     public function edit(Trainer $trainer)
     {
@@ -68,6 +68,4 @@ class EntraineurController extends Controller
     
         return redirect()->route('create-program');
     }
-    
-    
 }
