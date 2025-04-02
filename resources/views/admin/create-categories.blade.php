@@ -10,32 +10,7 @@
 <body class="bg-gray-100 font-sans">
     <div class="flex h-screen">
         <!-- Sidebar -->
-        <div class="bg-black text-white w-64 flex-shrink-0 hidden md:block">
-            <div class="flex items-center justify-center h-16 border-b border-gray-700">
-                <div class="flex items-center space-x-2">
-                    <i class="fas fa-dumbbell text-red-500 text-xl"></i>
-                    <span class="font-bold text-lg">GymTracker Admin</span>
-                </div>
-            </div>
-            <div class="p-4">
-                <nav>
-                    <ul class="space-y-2">
-                        <li>
-                            <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-300 hover:bg-gray-800">
-                                <i class="fas fa-th-large"></i>
-                                <span>Tableau de bord</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-red-500 text-white">
-                                <i class="fas fa-tags"></i>
-                                <span>Catégories</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+        @include('admin.sidebar')
         <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <header class="bg-white shadow-sm z-10">
