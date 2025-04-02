@@ -126,16 +126,16 @@
                                         </td>
                                        
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 flex items-center space-x-3">
-                                            {{-- <a href="{{ route('trainers.edit', $trainer->id) }}" class="text-blue-500 hover:text-blue-700"> --}}
+                                            <a href="{{ route('trainers.edit', $trainer->id) }}" class="text-blue-500 hover:text-blue-700">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            {{-- <form action="{{ route('trainers.destroy', $trainer->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet entraîneur ?');"> --}}
+                                            <form action="{{ route('trainers.destroy', $trainer->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet entraîneur ?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="text-red-500 hover:text-red-700">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
-                                            {{-- </form> --}}
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach

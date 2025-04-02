@@ -60,12 +60,13 @@ class EntraineurController extends Controller
         $trainer->update($trainerData);
     
       
-        return redirect()->route('create-program');
+        return redirect()->route('trainer.show');
     }
+
     public function destroy(Trainer $trainer)
     {
         $trainer->delete();
     
-        return redirect()->route('create-program');
+        return redirect()->route('trainer.show');
     }
 }
