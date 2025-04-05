@@ -11,13 +11,9 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/programmes', function () {
-    return view('program');
-})->name('programmes');
+Route::get('/programmes',[ProgramController::class, 'showProgram'])->name('programmes');
 
-Route::get('/programmes-details', function () {
-    return view('program-details');
-})->name('programmes-details');
+Route::get('/programmes-details/{id}', [ProgramController::class, 'showProgramDetails'])->name('programmes-details');
 
 Route::get('/coach', function () {
     return view('entraineur');
@@ -82,11 +78,11 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/create-categories', [CategoryController::class, 'show'])->name('categories.create');
     Route::post('/add-categories', [CategoryController::class, 'store'])->name('categories.store');
     Route::delete('/categories/{categorie}', [CategoryController::class, 'destroy'])->name('categories.destroy');
-});
-
-route::get('/trainers', [EntraineurController::class, 'show'])->name('trainer.show');
+    route::get('/trainers', [EntraineurController::class, 'show'])->name('trainer.show');
 Route::get('/create-trainer', function () { return view('admin.create-trainer');})->name('create-trainer');
 Route::post('/add-trainer', [EntraineurController::class, 'store'])->name('trainer.store');
 Route::delete('/trainers/{trainer}', [EntraineurController::class, 'destroy'])->name('trainers.destroy');
 Route::get('/trainers/{trainer}/edit', [EntraineurController::class, 'edit'])->name('trainers.edit');
 Route::put('/trainers/{trainer}', [EntraineurController::class, 'update'])->name('trainers.update');
+});
+

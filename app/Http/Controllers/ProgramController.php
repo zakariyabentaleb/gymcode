@@ -29,6 +29,17 @@ class ProgramController extends Controller
         
         return view('admin.program', compact('programs', 'totalprogram','categories','progCategory','categories'));
     }
+
+    public function showProgram()
+    {
+        $programs = Program::paginate(9);
+        return view('program', compact('programs'));
+    }
+    public function showProgramDetails($id)
+    {
+        $program = Program::findOrFail($id);
+        return view('program-details', compact('program'));
+    }
    
    
     public function create()
@@ -39,7 +50,7 @@ class ProgramController extends Controller
     
     public function store(Request $request)
     {
-        // Vérifier si les données arrivent correctement
+        
         //  dd($request->all());
     
         // Validation des données
@@ -49,7 +60,7 @@ class ProgramController extends Controller
             'level' => 'required|in:debutant,intermediaire,professionel',
             'price' => 'required|numeric|min:0',
             'duree' => 'required|integer|min:1|max:40',
-            'image_url' => 'required|url',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'trainer_id' => 'required|exists:trainers,id',
             'category_id'=> 'required|exists:categories,id',
         ]);
@@ -57,15 +68,24 @@ class ProgramController extends Controller
         // Vérification après validation
         //  dd($prog);
     
-        // Insertion en base
-        Program::create($prog);
+       
+        $path = $request->file('image')->store('program_images', 'public');
+
+       
+        Program::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'level' => $request->level,
+            'price' => $request->price,
+            'duree' => $request->duree,
+            'image_url' => $path, 
+            'category_id' => $request->category_id,
+            'trainer_id' => $request->trainer_id,
+        ]);
     
         return redirect()->route('programs.store')->with('success', 'Programme ajouté avec succès.');
     }
     
-    
-
-   
     public function show(Program $program)
     {
         return view('programs.show', compact('program'));

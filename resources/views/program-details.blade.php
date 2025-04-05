@@ -12,14 +12,14 @@
                     <div class="gradient-overlay w-full h-full py-20">
                         <div class="container mx-auto px-4 flex flex-col items-center">
                             <h5 class="text-brand-red font-semibold mb-2 tracking-wider text-center">DÉTAILS DU PROGRAMME</h5>
-                            <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white text-center text-shadow max-w-4xl">Cardio Intensif 8 Semaines</h1>
+                            <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white text-center text-shadow max-w-4xl">{{$program->title}}</h1>
                             <p class="text-gray-300 max-w-2xl text-center mb-4">Programme complet pour améliorer votre endurance et brûler un maximum de calories</p>
                             <div class="flex space-x-4 mb-8">
                                 <span class="bg-brand-red bg-opacity-20 text-brand-red px-4 py-1 rounded-full text-sm font-medium">
-                                    <i class="fas fa-fire-alt mr-2"></i>Niveau Intermédiaire
+                                    <i class="fas fa-fire-alt mr-2"></i>Niveau {{$program->level}}
                                 </span>
                                 <span class="bg-brand-red bg-opacity-20 text-brand-red px-4 py-1 rounded-full text-sm font-medium">
-                                    <i class="fas fa-clock mr-2"></i>8 Semaines
+                                    <i class="fas fa-clock mr-2"></i>{{$program->duree}} Semaines
                                 </span>
                                 <span class="bg-brand-red bg-opacity-20 text-brand-red px-4 py-1 rounded-full text-sm font-medium">
                                     <i class="fas fa-star mr-2"></i>4.5/5 (128 avis)
@@ -35,8 +35,7 @@
                         <!-- Left Column - Main Details -->
                         <div class="lg:col-span-2">
                             <div class="bg-white p-8 rounded-xl shadow-lg">
-                                <img src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Cardio Intensif" class="w-full h-96 object-cover rounded-xl mb-8">
-                                
+                                <img src="{{ asset('storage/' . $program->image_url) }}" alt="Programme"  class="w-full h-96 object-cover rounded-xl mb-8" />
                                 <h2 class="text-2xl font-bold mb-6 border-b border-gray-200 pb-4">Description du programme</h2>
                                 <p class="text-gray-700 mb-8 leading-relaxed">
                                     Ce programme de cardio intensif de 8 semaines est conçu pour vous aider à améliorer votre capacité cardiovasculaire, brûler des calories efficacement et augmenter votre endurance globale. Chaque semaine comprend 3 à 4 séances d'entraînement variées qui combinent des exercices HIIT (High-Intensity Interval Training), des circuits cardiovasculaires et des sessions d'endurance progressive.
@@ -130,7 +129,7 @@
                                 <div class="text-center mb-6">
                                     <p class="text-gray-600 line-through">€69.99</p>
                                     <div class="flex items-center justify-center space-x-3">
-                                        <h3 class="text-4xl font-bold text-brand-red">€49.99</h3>
+                                        <h3 class="text-4xl font-bold text-brand-red">{{$program->price}}</h3>
                                         <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">-30%</span>
                                     </div>
                                     <p class="text-sm text-gray-500 mt-1">Offre limitée - Fin dans 2 jours</p>
@@ -201,73 +200,7 @@
                 </section>
                 
                 <!-- Related Programs Section -->
-                <section class="py-16 bg-brand-dark">
-                    <div class="container mx-auto px-4">
-                        <div class="text-center mb-12">
-                            <h5 class="text-brand-red font-semibold mb-2 tracking-wider">AUTRES PROGRAMMES</h5>
-                            <h2 class="text-3xl font-bold text-white">Programmes similaires</h2>
-                        </div>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            <!-- Programme 1 -->
-                            <div class="bg-white rounded-xl shadow-lg overflow-hidden program-card">
-                                <div class="relative">
-                                    <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Force & Hypertrophie" class="w-full h-64 object-cover">
-                                </div>
-                                <div class="p-6">
-                                    <div class="flex items-center mb-3">
-                                        <div class="text-brand-red mr-2"><i class="fas fa-dumbbell"></i></div>
-                                        <span class="text-sm text-gray-500">Niveau: Débutant à Avancé</span>
-                                    </div>
-                                    <h3 class="text-xl font-semibold mb-2 hover:text-brand-red transition duration-300">Force & Hypertrophie</h3>
-                                    <p class="text-gray-600 mb-4">Un programme de 12 semaines pour développer votre masse musculaire et votre force.</p>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-brand-red font-bold text-xl">€69.99</span>
-                                        <a href="#" class="btn-primary bg-brand-red hover:bg-red-700 text-white py-2 px-5 rounded-lg font-semibold transition duration-300">Voir détails</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Programme 2 -->
-                            <div class="bg-white rounded-xl shadow-lg overflow-hidden program-card">
-                                <div class="relative">
-                                    <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Yoga & Bien-être" class="w-full h-64 object-cover">
-                                </div>
-                                <div class="p-6">
-                                    <div class="flex items-center mb-3">
-                                        <div class="text-brand-red mr-2"><i class="fas fa-spa"></i></div>
-                                        <span class="text-sm text-gray-500">Niveau: Tous niveaux</span>
-                                    </div>
-                                    <h3 class="text-xl font-semibold mb-2 hover:text-brand-red transition duration-300">Yoga & Bien-être Complet</h3>
-                                    <p class="text-gray-600 mb-4">Améliorez votre souplesse, votre équilibre et réduisez votre stress.</p>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-brand-red font-bold text-xl">€39.99</span>
-                                        <a href="#" class="btn-primary bg-brand-red hover:bg-red-700 text-white py-2 px-5 rounded-lg font-semibold transition duration-300">Voir détails</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Programme 3 -->
-                            <div class="bg-white rounded-xl shadow-lg overflow-hidden program-card">
-                                <div class="relative">
-                                    <img src="https://images.unsplash.com/photo-1632781297772-1d68a64c5e93?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="HIIT & Métabolisme" class="w-full h-64 object-cover">
-                                </div>
-                                <div class="p-6">
-                                    <div class="flex items-center mb-3">
-                                        <div class="text-brand-red mr-2"><i class="fas fa-bolt"></i></div>
-                                        <span class="text-sm text-gray-500">Niveau: Intermédiaire</span>
-                                    </div>
-                                    <h3 class="text-xl font-semibold mb-2 hover:text-brand-red transition duration-300">HIIT & Métabolisme</h3>
-                                    <p class="text-gray-600 mb-4">Des séances courtes et intenses pour booster votre métabolisme et brûler des graisses.</p>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-brand-red font-bold text-xl">€54.99</span>
-                                        <a href="#" class="btn-primary bg-brand-red hover:bg-red-700 text-white py-2 px-5 rounded-lg font-semibold transition duration-300">Voir détails</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+              
 
                 <!-- FAQ Section -->
                 <section class="py-16 bg-white">

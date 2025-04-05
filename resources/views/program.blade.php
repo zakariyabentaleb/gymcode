@@ -36,16 +36,18 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Programme 1 -->
+                    @foreach ($programs as $program)
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden program-card">
                         <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Cardio Intensif" class="w-full h-64 object-cover">
+                           
+                            <img src="{{ asset('storage/' . $program->image_url) }}" alt="Programme"  class="w-full h-64 object-cover" />
+
                             <div class="absolute top-4 right-4 bg-brand-red text-white text-xs font-semibold px-3 py-1 rounded-lg">POPULAIRE</div>
                         </div>
                         <div class="p-6">
                             <div class="flex items-center mb-3">
                                 <div class="text-brand-red mr-2"><i class="fas fa-fire-alt"></i></div>
-                                <span class="text-sm text-gray-500">Niveau: Intermédiaire</span>
+                                <span class="text-sm text-gray-500">Niveau: {{$program->level}}</span>
                                 <div class="ml-auto flex">
                                     <span class="sr-only">4.5 étoiles sur 5</span>
                                     <div class="text-yellow-500"><i class="fas fa-star"></i></div>
@@ -55,70 +57,15 @@
                                     <div class="text-yellow-500"><i class="fas fa-star-half-alt"></i></div>
                                 </div>
                             </div>
-                            <a href="{{route('programmes-details')}}"><h3 class="text-xl font-semibold mb-2 hover:text-brand-red transition duration-300">Cardio Intensif 8 Semaines</h3></a>
+                            <a href="{{route('programmes-details',['id' => $program->id])}}"><h3 class="text-xl font-semibold mb-2 hover:text-brand-red transition duration-300">Cardio Intensif {{$program->duree}} Semaines</h3></a>
                             <p class="text-gray-600 mb-4">Un programme complet pour améliorer votre endurance et brûler un maximum de calories en 8 semaines.</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-brand-red font-bold text-xl">€49.99</span>
+                                <span class="text-brand-red font-bold text-xl">{{$program->price}} DH</span>
                                 <a href="#" class="btn-primary bg-brand-red hover:bg-red-700 text-white py-2 px-5 rounded-lg font-semibold transition duration-300">S'inscrire</a>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Programme 2 -->
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden program-card">
-                        <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Musculation" class="w-full h-64 object-cover">
-                            <div class="absolute top-4 right-4 bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-lg">NOUVEAU</div>
-                        </div>
-                        <div class="p-6">
-                            <div class="flex items-center mb-3">
-                                <div class="text-brand-red mr-2"><i class="fas fa-dumbbell"></i></div>
-                                <span class="text-sm text-gray-500">Niveau: Débutant à Avancé</span>
-                                <div class="ml-auto flex">
-                                    <span class="sr-only">5 étoiles sur 5</span>
-                                    <div class="text-yellow-500"><i class="fas fa-star"></i></div>
-                                    <div class="text-yellow-500"><i class="fas fa-star"></i></div>
-                                    <div class="text-yellow-500"><i class="fas fa-star"></i></div>
-                                    <div class="text-yellow-500"><i class="fas fa-star"></i></div>
-                                    <div class="text-yellow-500"><i class="fas fa-star"></i></div>
-                                </div>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-2 hover:text-brand-red transition duration-300">Force & Hypertrophie</h3>
-                            <p class="text-gray-600 mb-4">Un programme de 12 semaines pour développer votre masse musculaire et votre force avec des exercices ciblés.</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-brand-red font-bold text-xl">€69.99</span>
-                                <a href="#" class="btn-primary bg-brand-red hover:bg-red-700 text-white py-2 px-5 rounded-lg font-semibold transition duration-300">S'inscrire</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Programme 3 -->
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden program-card">
-                        <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Yoga" class="w-full h-64 object-cover">
-                            <div class="absolute top-4 right-4 bg-blue-500 text-white text-xs font-semibold px-3 py-1 rounded-lg">RECOMMANDÉ</div>
-                        </div>
-                        <div class="p-6">
-                            <div class="flex items-center mb-3">
-                                <div class="text-brand-red mr-2"><i class="fas fa-spa"></i></div>
-                                <span class="text-sm text-gray-500">Niveau: Tous niveaux</span>
-                                <div class="ml-auto flex">
-                                    <span class="sr-only">4 étoiles sur 5</span>
-                                    <div class="text-yellow-500"><i class="fas fa-star"></i></div>
-                                    <div class="text-yellow-500"><i class="fas fa-star"></i></div>
-                                    <div class="text-yellow-500"><i class="fas fa-star"></i></div>
-                                    <div class="text-yellow-500"><i class="fas fa-star"></i></div>
-                                    <div class="text-gray-300"><i class="fas fa-star"></i></div>
-                                </div>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-2 hover:text-brand-red transition duration-300">Yoga & Bien-être Complet</h3>
-                            <p class="text-gray-600 mb-4">Améliorez votre souplesse, votre équilibre et réduisez votre stress avec ce programme complet de yoga.</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-brand-red font-bold text-xl">€39.99</span>
-                                <a href="#" class="btn-primary bg-brand-red hover:bg-red-700 text-white py-2 px-5 rounded-lg font-semibold transition duration-300">S'inscrire</a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
                 <div class="flex justify-center mt-12">

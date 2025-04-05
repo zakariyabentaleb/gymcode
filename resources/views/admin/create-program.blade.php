@@ -44,7 +44,7 @@
                             <p class="text-gray-600 text-sm mt-1">Remplissez tous les champs pour créer un nouveau programme</p>
                         </div>
 
-                        <form action='{{route('programs.store')}}' method="POST" class="p-6">
+                        <form action='{{route('programs.store')}}' method="POST" enctype="multipart/form-data" class="p-6">
                             @csrf
                             <!-- Basic Information Section -->
                             <div class="mb-8">
@@ -90,10 +90,17 @@
                                             <img id="imagePreview" src="" alt="Image Preview" class="w-32 h-32 object-cover border border-gray-300 rounded-lg">
                                         </div>
                                     </div> --}}
-                                    <div>
+                                    {{-- <div>
                                         <label for="image_url" class="block text-sm font-medium text-gray-700 mb-1">URL de l'image *</label>
                                         <input type="text" id="image_url" name="image_url" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Collez le lien de l'image ici" oninput="previewImageFromURL(event)">
+                                    </div> --}}
+                                    <div>
+                                        <label for="image" class="block text-sm font-medium text-gray-700 mb-1">Image du programme *</label>
+                                        <input type="file" id="image" name="image" accept="image/*" 
+                                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                                        <p class="mt-1 text-xs text-gray-500">PNG, JPG ou GIF jusqu'à 2MB</p>
                                     </div>
+                                    
                                     <div>
                                         <label for="duree" class="block text-sm font-medium text-gray-700 mb-1">Durée (semaines) *</label>
                                         <input type="number" id="duree" name="duree" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
