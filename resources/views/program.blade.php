@@ -71,12 +71,16 @@
                     @endforeach
                 </div>
 
-                <div class="flex justify-center mt-12">
+                {{-- <div class="flex justify-center mt-12">
                     <a href="#" class="btn-primary bg-brand-dark hover:bg-gray-800 text-white py-3 px-8 rounded-lg font-semibold tracking-wide transition duration-300 flex items-center">
                         <span>Voir tous les programmes</span>
                         <i class="fas fa-arrow-right ml-2"></i>
                     </a>
+                </div> --}}
+                <div class="flex justify-center mt-12">
+                    {{ $programs->links('pagination::tailwind') }}
                 </div>
+                
             </div>
         </section>
 

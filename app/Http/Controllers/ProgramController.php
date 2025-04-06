@@ -32,7 +32,7 @@ class ProgramController extends Controller
 
     public function showProgram()
     {
-        $programs = Program::paginate(9);
+        $programs = Program::paginate(6);
         return view('program', compact('programs'));
     }
     public function showProgramDetails($id)
