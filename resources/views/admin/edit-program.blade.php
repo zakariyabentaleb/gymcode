@@ -44,7 +44,7 @@
                             <p class="text-gray-600 text-sm mt-1">Remplissez tous les champs pour créer un nouveau programme</p>
                         </div>
 
-                        <form action="{{ route('programs.update', $program->id) }}" method="POST" class="p-6">
+                        <form action="{{ route('programs.update', $program->id) }}" method="POST" enctype="multipart/form-data" class="p-6">
                             @csrf
                             @method('PUT') <!-- Ajout de la méthode PUT -->
                             
@@ -75,9 +75,15 @@
                                         <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description *</label>
                                         <textarea id="description" name="description" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>{{ $program->description }}</textarea>
                                     </div>
+                                    @if($program->image_url)
+                                    <div class="mt-2">
+                                        <p class="text-sm text-gray-500">Image actuelle :</p>
+                                        <img src="{{ asset('storage/'.$program->image_url) }}" alt="Image actuelle du programme" class="w-32 h-32 object-cover border border-gray-300 rounded-lg mt-2">
+                                    </div>
+                                    @endif
                                     <div>
-                                        <label for="image_url" class="block text-sm font-medium text-gray-700 mb-1">URL de l'image *</label>
-                                        <input type="text" id="image_url" name="image_url" value="{{ $program->image_url }}" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                                        <label for="image" class="block text-sm font-medium text-gray-700 mb-1">Nouvelle image</label>
+                                        <input type="file" id="image" name="image" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
                                     </div>
                                     <div>
                                         <label for="duree" class="block text-sm font-medium text-gray-700 mb-1">Durée (semaines) *</label>

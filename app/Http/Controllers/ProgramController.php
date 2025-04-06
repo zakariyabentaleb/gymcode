@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Trainer;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProgramController extends Controller
 {
@@ -99,20 +100,58 @@ class ProgramController extends Controller
         return view('admin.edit-program', compact('program', 'trainers', 'categories'));
     }
 
-    public function update(Request $request, Program $program)
+    public function update(Request $request, $id)
     {
-        $request->validate([
+        // $request->validate([
+        //     'title' => 'required|string|max:255',
+        //     'description' => 'required|string',
+        //     'level' => 'required|in:debutant,intermediaire,professionel',
+        //     'duree' => 'required|integer|min:1|max:40',
+        //     'price' => 'required|numeric|min:0',
+        //     'image_url' => 'required|url',
+        //     'trainer_id' => 'required|exists:trainers,id',
+        //     'category_id'=> 'required|exists:categories,id',
+        // ]);
+
+        // $program->update($request->all());
+        $prog = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'level' => 'required|in:debutant,intermediaire,professionel',
-            'duree' => 'required|integer|min:1|max:40',
             'price' => 'required|numeric|min:0',
-            'image_url' => 'required|url',
+            'duree' => 'required|integer|min:1|max:40',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
             'trainer_id' => 'required|exists:trainers,id',
             'category_id'=> 'required|exists:categories,id',
         ]);
-
-        $program->update($request->all());
+    
+       
+        $program = Program::findOrFail($id);
+    
+      
+        if ($request->hasFile('image')) {
+            
+            if ($program->image_url && Storage::exists('public/' . $program->image_url)) {
+                Storage::delete('public/' . $program->image_url);
+            }
+          
+            $path = $request->file('image')->store('program_images', 'public');
+        } else {
+           
+            $path = $program->image_url;
+        }
+    
+       
+        $program->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'level' => $request->level,
+            'price' => $request->price,
+            'duree' => $request->duree,
+            'image_url' => $path,  
+            'category_id' => $request->category_id,
+            'trainer_id' => $request->trainer_id,
+        ]);
 
         return redirect()->route('programs.index')->with('success', 'Programme mis à jour avec succès.');
     }
