@@ -1,3 +1,6 @@
+@php
+    use Illuminate\Support\Str;
+@endphp
 @extends('layouts.app')
 
 @section('title', 'GymTracker - No Pain, No Gain')
@@ -58,7 +61,7 @@
                                 </div>
                             </div>
                             <a href="{{route('programmes-details',['id' => $program->id])}}"><h3 class="text-xl font-semibold mb-2 hover:text-brand-red transition duration-300">Cardio Intensif {{$program->duree}} Semaines</h3></a>
-                            <p class="text-gray-600 mb-4">Un programme complet pour améliorer votre endurance et brûler un maximum de calories en 8 semaines.</p>
+                            <p class="text-gray-600 mb-4">{{ Str::limit($program->description, 20) }} </p>
                             <div class="flex justify-between items-center">
                                 <span class="text-brand-red font-bold text-xl">{{$program->price}} DH</span>
                                 <a href="#" class="btn-primary bg-brand-red hover:bg-red-700 text-white py-2 px-5 rounded-lg font-semibold transition duration-300">S'inscrire</a>
