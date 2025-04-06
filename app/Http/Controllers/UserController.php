@@ -132,9 +132,9 @@ class UserController extends Controller
 
         return redirect('/');
     }
-    public function dashboard()
+    public function reservation()
     {
-        return view('user.dashboard');
+        return view('user.my-reservation');
     }
     
 }

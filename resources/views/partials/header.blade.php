@@ -12,7 +12,7 @@
                 <a href="{{ route('entraineur') }}" class="nav-link {{ request()->routeIs('entraineur') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Entraîneurs</a>
                 <a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Contact</a>
                 @auth
-                <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Mon Dashboard</a>
+                <a href="{{ route('reservation') }}" class="nav-link {{ request()->routeIs('reservation') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Mes Réservations</a>
                 <form method="POST" action="{{ route('logout') }}" class="inline">
                     @csrf
                     <button type="submit" class="bg-brand-red hover:bg-red-700 transition duration-300 py-2 px-6 rounded-lg font-semibold">Déconnexion</button>
@@ -35,7 +35,7 @@
                 <a href="{{ route('entraineur') }}" class="{{ request()->routeIs('entraineur') ? 'text-brand-red' : 'text-white' }} font-medium">Entraîneurs</a>
                 <a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'text-brand-red' : 'text-white' }} font-medium">Contact</a>
                 @auth
-                <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Mon Dashboard</a>
+                <a href="{{ route('reservation') }}" class="nav-link {{ request()->routeIs('reservation') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Mon Dashboard</a>
                 <form method="POST" action="{{ route('logout') }}" class="inline">
                     @csrf
                     <button type="submit" class="bg-brand-red hover:bg-red-700 transition duration-300 py-2 px-6 rounded-lg font-semibold">Déconnexion</button>

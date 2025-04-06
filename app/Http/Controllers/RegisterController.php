@@ -22,7 +22,14 @@ class RegisterController extends Controller
             'terms' => ['required', 'accepted'],
         ]);
 
-       
+        $user = User::create([
+            'full_name' => $validated['full_name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'role' => $validated['role'],
+            'terms_accepted' => true,
+        ]);
+        
         if ($validated['role'] === 'trainer') {
             $user = Trainer::create([
                 'full_name' => $validated['full_name'],
@@ -32,7 +39,7 @@ class RegisterController extends Controller
                 'terms_accepted' => true,
             ]);
         } else {
-            $user = User::create([
+            $user = Membre::create([
                 'full_name' => $validated['full_name'],
                 'email' => $validated['email'],
                 'password' => Hash::make($validated['password']),
