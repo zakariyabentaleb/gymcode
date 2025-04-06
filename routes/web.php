@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\EntraineurController;
+use App\Http\Controllers\ReservationController;
 
 Route::get('/', function () {
     return view('home');
@@ -61,7 +62,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
-    Route::get('/my-reservations', [UserController::class, 'reservation'])->name('reservation');
+    Route::get('/my-reservations', [ReservationController ::class, 'index'])->name('reservation');
 });
 
 
