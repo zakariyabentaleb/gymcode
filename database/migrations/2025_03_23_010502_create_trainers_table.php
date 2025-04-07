@@ -18,6 +18,10 @@ return new class extends Migration
                 $table->string('name');
                 $table->string('email')->unique();
                 $table->string('specialty')->nullable();
+                $table->string('role');
+                $table->string('description')->nullable();
+                $table->string('password');
+                $table->boolean('terms_accepted');
                 $table->timestamps();
             });
         }

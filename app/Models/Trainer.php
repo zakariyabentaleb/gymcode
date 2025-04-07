@@ -10,7 +10,8 @@ class Trainer extends User
 
     use HasFactory;
 
-    protected $fillable = ['name', 'email', 'specialty'];
+    protected $fillable = ['name', 'email', 'specialty', 'role', 'description', 'password', 'terms_accepted'];
+   
 
     public function programs()
     {

@@ -51,21 +51,47 @@
                                     @csrf
                                     <div class="mb-4">
                                         <label class="block text-gray-700">Nom</label>
-                                        <input type="text" name="name" class="w-full mt-1 p-2 border rounded-lg focus:ring-red-500" required>
+                                        <input type="text" name="name" class="w-full mt-1 p-2 border rounded-lg" required>
                                     </div>
+                                
                                     <div class="mb-4">
                                         <label class="block text-gray-700">Email</label>
-                                        <input type="email" name="email" class="w-full mt-1 p-2 border rounded-lg focus:ring-red-500" required>
+                                        <input type="email" name="email" class="w-full mt-1 p-2 border rounded-lg" required>
                                     </div>
+                                
                                     <div class="mb-4">
                                         <label class="block text-gray-700">Spécialité</label>
-                                        <input type="text" name="specialty" class="w-full mt-1 p-2 border rounded-lg focus:ring-red-500">
+                                        <input type="text" name="specialty" class="w-full mt-1 p-2 border rounded-lg">
                                     </div>
+                                
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700">Rôle</label>
+                                        <input type="text" name="role" value="trainer" class="w-full mt-1 p-2 border rounded-lg" readonly>
+                                    </div>
+                                
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700">Description</label>
+                                        <textarea name="description" class="w-full mt-1 p-2 border rounded-lg" rows="3"></textarea>
+                                    </div>
+                                
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700">Mot de passe</label>
+                                        <input type="password" name="password" class="w-full mt-1 p-2 border rounded-lg" required>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <label class="inline-flex items-center">
+                                            <input type="checkbox" name="terms_accepted" class="form-checkbox" required>
+                                            <span class="ml-2 text-gray-700">Accepter les conditions</span>
+                                        </label>
+                                    </div>
+                                
                                     <div class="flex justify-end space-x-2">
                                         <a href="" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400">Annuler</a>
                                         <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">Ajouter</button>
                                     </div>
                                 </form>
+                                
                             </div>
                        
                     </div>

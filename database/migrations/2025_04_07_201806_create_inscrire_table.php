@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inscription', function (Blueprint $table) {
+        Schema::create('inscrire', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('member_id')->constrained('membre')->onDelete('cascade'); 
+            $table->foreignId('member_id')->constrained('membres')->onDelete('cascade'); 
             $table->foreignId('program_id')->constrained('program')->onDelete('cascade');
             $table->timestamps();
         });
