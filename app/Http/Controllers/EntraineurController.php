@@ -49,6 +49,12 @@ class EntraineurController extends Controller
     //     return redirect()->route('trainer.show');
     // }
 
+    public function showTrainer()
+    {
+        $trainers = Trainer::all(); 
+        return view('entraineur', compact('trainers')); 
+    }
+
 public function store(Request $request)
 {
     $validated = $request->validate([

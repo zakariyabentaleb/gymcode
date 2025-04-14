@@ -74,11 +74,12 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Trainer 1 -->
+                @foreach ($trainers as $trainer)
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden trainer-card transition duration-500">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd" alt="Thomas Laurent" class="w-full h-80 object-cover">
                         <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-dark to-transparent py-6 px-6">
-                            <h3 class="text-white font-bold text-xl">Thomas Laurent</h3>
+                            <h3 class="text-white font-bold text-xl">{{$trainer->name}}</h3>
                             <p class="text-gray-300">Coach de musculation</p>
                         </div>
                         <div class="absolute top-4 right-4 flex space-x-2">
@@ -92,11 +93,9 @@
                     </div>
                     <div class="p-6">
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Musculation</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Force</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Nutrition</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">{{$trainer->specialty}}</span>
                         </div>
-                        <p class="text-gray-600 mb-4">Spécialiste en musculation avec 8 ans d'expérience. Thomas vous aidera à développer votre masse musculaire et à améliorer votre force.</p>
+                        <p class="text-gray-600 mb-4">{{$trainer->description}}</p>
                         <div class="flex justify-between items-center">
                             <div>
                                 <div class="flex text-yellow-400 mb-1">
@@ -106,291 +105,20 @@
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star-half-alt"></i>
                                 </div>
-                                <p class="text-sm text-gray-500">32 avis clients</p>
                             </div>
                             <a href="#" class="bg-brand-red hover:bg-red-700 text-white py-2 px-4 rounded-lg transition duration-300">Réserver</a>
                         </div>
                     </div>
                 </div>
-
-                <!-- Trainer 2 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden trainer-card transition duration-500">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1509833903111-9cb142f644e4" alt="Sarah Dubois" class="w-full h-80 object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-dark to-transparent py-6 px-6">
-                            <h3 class="text-white font-bold text-xl">Sarah Dubois</h3>
-                            <p class="text-gray-300">Coach fitness</p>
-                        </div>
-                        <div class="absolute top-4 right-4 flex space-x-2">
-                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">HIIT</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Cardio</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Perte de poids</span>
-                        </div>
-                        <p class="text-gray-600 mb-4">Experte en fitness fonctionnel et HIIT. Sarah vous accompagnera pour perdre du poids et améliorer votre condition physique générale.</p>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <div class="flex text-yellow-400 mb-1">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="text-sm text-gray-500">47 avis clients</p>
-                            </div>
-                            <a href="#" class="bg-brand-red hover:bg-red-700 text-white py-2 px-4 rounded-lg transition duration-300">Réserver</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Trainer 3 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden trainer-card transition duration-500">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b" alt="Marc Renaud" class="w-full h-80 object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-dark to-transparent py-6 px-6">
-                            <h3 class="text-white font-bold text-xl">Marc Renaud</h3>
-                            <p class="text-gray-300">Coach CrossFit</p>
-                        </div>
-                        <div class="absolute top-4 right-4 flex space-x-2">
-                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">CrossFit</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Fonctionnel</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Performance</span>
-                        </div>
-                        <p class="text-gray-600 mb-4">Coach CrossFit certifié avec une approche axée sur la performance. Marc vous aidera à repousser vos limites et à atteindre votre plein potentiel.</p>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <div class="flex text-yellow-400 mb-1">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <p class="text-sm text-gray-500">29 avis clients</p>
-                            </div>
-                            <a href="#" class="bg-brand-red hover:bg-red-700 text-white py-2 px-4 rounded-lg transition duration-300">Réserver</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Trainer 4 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden trainer-card transition duration-500">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883" alt="Emma Martin" class="w-full h-80 object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-dark to-transparent py-6 px-6">
-                            <h3 class="text-white font-bold text-xl">Emma Martin</h3>
-                            <p class="text-gray-300">Coach Yoga & Pilates</p>
-                        </div>
-                        <div class="absolute top-4 right-4 flex space-x-2">
-                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Yoga</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Pilates</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Relaxation</span>
-                        </div>
-                        <p class="text-gray-600 mb-4">Spécialiste en yoga et pilates. Emma vous guidera vers un meilleur équilibre physique et mental à travers des pratiques douces et efficaces.</p>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <div class="flex text-yellow-400 mb-1">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                                <p class="text-sm text-gray-500">38 avis clients</p>
-                            </div>
-                            <a href="#" class="bg-brand-red hover:bg-red-700 text-white py-2 px-4 rounded-lg transition duration-300">Réserver</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Trainer 5 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden trainer-card transition duration-500">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc" alt="Lucas Bernard" class="w-full h-80 object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-dark to-transparent py-6 px-6">
-                            <h3 class="text-white font-bold text-xl">Lucas Bernard</h3>
-                            <p class="text-gray-300">Coach de boxe</p>
-                        </div>
-                        <div class="absolute top-4 right-4 flex space-x-2">
-                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Boxe</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Self-défense</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Cardio</span>
-                        </div>
-                        <p class="text-gray-600 mb-4">Ancien champion de boxe reconverti en coach sportif. Lucas vous initiera aux techniques de boxe tout en améliorant votre condition physique.</p>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <div class="flex text-yellow-400 mb-1">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <p class="text-sm text-gray-500">26 avis clients</p>
-                            </div>
-                            <a href="#" class="bg-brand-red hover:bg-red-700 text-white py-2 px-4 rounded-lg transition duration-300">Réserver</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Trainer 6 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden trainer-card transition duration-500">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1595078475328-1ab05d0a6a0e" alt="Julie Moreau" class="w-full h-80 object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-dark to-transparent py-6 px-6">
-                            <h3 class="text-white font-bold text-xl">Julie Moreau</h3>
-                            <p class="text-gray-300">Nutritionniste sportive</p>
-                        </div>
-                        <div class="absolute top-4 right-4 flex space-x-2">
-                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white social-icon">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Nutrition</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Diététique</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm specialty-badge">Bien-être</span>
-                        </div>
-                        <p class="text-gray-600 mb-4">Nutritionniste spécialisée dans le sport. Julie vous aidera à optimiser votre alimentation pour maximiser vos performances et votre récupération.</p>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <div class="flex text-yellow-400 mb-1">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="text-sm text-gray-500">41 avis clients</p>
-                            </div>
-                            <a href="#" class="bg-brand-red hover:bg-red-700 text-white py-2 px-4 rounded-lg transition duration-300">Réserver</a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
 
-            <div class="text-center mt-12">
-                <a href="#" class="inline-flex items-center text-brand-red hover:text-red-700 font-semibold transition duration-300">
-                    <span>Voir tous nos entraîneurs</span>
-                    <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-            </div>
+          
         </div>
     </section>
 
     <!-- Training Categories Section -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h5 class="text-brand-red font-semibold mb-2 tracking-wider">SPÉCIALITÉS</h5>
-                <h2 class="text-3xl font-bold mb-4 text-brand-dark">Nos Domaines d'Expertise</h2>
-                <p class="max-w-2xl mx-auto text-gray-600">Découvrez les différents domaines dans lesquels nos entraîneurs se spécialisent pour vous offrir une expérience d'entraînement complète.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Category 1 -->
-                <div class="group overflow-hidden rounded-xl shadow-lg relative">
-                    <img src="https://images.unsplash.com/photo-1546483875-ad9014c88eba" alt="Musculation" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent opacity-70"></div>
-                    <div class="absolute bottom-0 left-0 p-6">
-                        <h3 class="text-white font-bold text-xl mb-2">Musculation</h3>
-                        <p class="text-gray-200 mb-4 text-sm">Développez votre masse musculaire et votre force</p>
-                        <a href="#" class="inline-flex items-center text-white bg-brand-red hover:bg-red-700 px-4 py-2 rounded-lg transition duration-300 text-sm">
-                            <span>En savoir plus</span>
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Category 2 -->
-                <div class="group overflow-hidden rounded-xl shadow-lg relative">
-                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a" alt="Cardio" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent opacity-70"></div>
-                    <div class="absolute bottom-0 left-0 p-6">
-                        <h3 class="text-white font-bold text-xl mb-2">Cardio & HIIT</h3>
-                        <p class="text-gray-200 mb-4 text-sm">Améliorez votre endurance et brûlez des calories</p>
-                        <a href="#" class="inline-flex items-center text-white bg-brand-red hover:bg-red-700 px-4 py-2 rounded-lg transition duration-300 text-sm">
-                            <span>En savoir plus</span>
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Category 3 -->
-                <div class="group overflow-hidden rounded-xl shadow-lg relative">
-                    <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0" alt="Yoga" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent opacity-70"></div>
-                    <div class="absolute bottom-0 left-0 p-6">
-                        <h3 class="text-white font-bold text-xl mb-2">Yoga & Pilates</h3>
-                        <p class="text-gray-200 mb-4 text-sm">Retrouvez équilibre, souplesse et sérénité</p>
-                        <a href="#" class="inline-flex items-center text-white bg-brand-red hover:bg-red-700 px-4 py-2 rounded-lg transition duration-300 text-sm">
-                            <span>En savoir plus</span>
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Category 4 -->
-                <div class="group overflow-hidden rounded-xl shadow-lg relative">
-                    <img src="https://images.unsplash.com/photo-1615915625018-da195fc22f0c" alt="Nutrition" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent opacity-70"></div>
-                    <div class="absolute bottom-0 left-0 p-6">
-                        <h3 class="text-white font-bold text-xl mb-2">Nutrition</h3>
-                        <p class="text-gray-200 mb-4 text-sm">Optimisez votre alimentation pour vos objectifs</p>
-                        <a href="#" class="inline-flex items-center text-white bg-brand-red hover:bg-red-700 px-4 py-2 rounded-lg transition duration-300 text-sm">
-                            <span>En savoir plus</span>
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  
 
     <!-- Booking Section -->
     <section id="booking" class="py-20 bg-brand-dark">

@@ -15,7 +15,8 @@
                 <a href="{{ route('reservation') }}" class="nav-link {{ request()->routeIs('reservation') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Mes Réservations</a>
                 <form method="POST" action="{{ route('logout') }}" class="inline">
                     @csrf
-                    <button type="submit" class="bg-brand-red hover:bg-red-700 transition duration-300 py-2 px-6 rounded-lg font-semibold">Déconnexion</button>
+                    <button type="submit" class="bg-brand-red hover:bg-red-700 transition duration-300 py-2 px-6 rounded-lg font-semibold">Déconnexion
+                    </button>
                 </form>
             @else
                 <a href="{{ route('login') }}" class="bg-brand-red hover:bg-red-700 transition duration-300 py-2 px-6 rounded-lg font-semibold">Se connecter</a>
