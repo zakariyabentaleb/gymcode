@@ -10,18 +10,17 @@ class Reservation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'membre_id', 'trainer_id', 'date', 'time', 'price', 'status'
+        'membre_id', 'trainer_id', 'date', 'time','status'
     ];
 
     
-    public function user()
+    public function membre()
     {
-        return $this->belongsTo(Membre::class);
+        return $this->belongsTo(User::class, 'membre_id');
     }
-
-   
-    public function coach()
+    
+    public function trainer()
     {
-        return $this->belongsTo(Trainer::class);
+        return $this->belongsTo(User::class, 'trainer_id');
     }
 }

@@ -79,7 +79,7 @@
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd" alt="Thomas Laurent" class="w-full h-80 object-cover">
                         <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-dark to-transparent py-6 px-6">
-                            <h3 class="text-white font-bold text-xl">{{$trainer->name}}</h3>
+                            <h3 class="text-white font-bold text-xl">{{$trainer->full_name}}</h3>
                             <p class="text-gray-300">Coach de musculation</p>
                         </div>
                         <div class="absolute top-4 right-4 flex space-x-2">
@@ -177,18 +177,13 @@
                         <div class="mb-6">
                             <div>
                                 <label for="full_name" class="block text-gray-700 mb-2">full name</label>
-                                <input type="text" id="full_name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red">
+                                <input type="text" id="full_name" name="full_name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red">
                             </div>
                             
                         </div>
                         <div class="mb-6">
                             <label for="email" class="block text-gray-700 mb-2">Email</label>
-                            <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red">
-                        </div>
-                        
-                        <div class="mb-6">
-                            <label for="phone" class="block text-gray-700 mb-2">Téléphone</label>
-                            <input type="tel" id="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red">
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red">
                         </div>
                         
                         <div class="mb-6">
@@ -196,14 +191,14 @@
                             <select id="trainer" name="trainer_id" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red" required>
                                 <option value="">Choisir un entraîneur</option>
                                 @foreach ($trainers as $trainer)
-                                    <option value="{{ $trainer->id }}">{{ $trainer->name }}</option>
+                                    <option value="{{ $trainer->id }}">{{ $trainer->full_name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         
                         <div class="mb-6">
                             <label for="date" class="block text-gray-700 mb-2">Date souhaitée</label>
-                            <input type="date" id="date" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red">
+                            <input type="date" id="date"  name="date" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red">
                         </div>
 
                         <div class="mb-6">
@@ -211,10 +206,7 @@
                             <input type="time" id="time" name="time" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red" required>
                         </div>
                    
-                       <div class="mb-6">
-                        <label for="price" class="block text-gray-700 mb-2">Prix (€)</label>
-                        <input type="number" step="0.01" id="price" name="price" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red" required>
-                      </div>
+                      
         
                         <button type="submit" class="w-full bg-brand-red hover:bg-red-700 text-white py-3 px-6 rounded-lg font-semibold transition duration-300">Réserver ma séance</button>
                     </form>

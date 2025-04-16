@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Reservation;
-use App\Models\Trainer;
+use App\Models\User;
+use App\Models\Trainer;         
 use Illuminate\Support\Facades\Auth; 
 use Illuminate\Http\Request;
 
@@ -11,27 +12,23 @@ class ReservationController  extends Controller
 
     public function store(Request $request)
     {    
-        dd(Auth::id());
-        dd($request->all());
+       
         $request->validate([
             'full_name' => 'required|string|max:255', 
             'email' => 'required|email',
-            'phone' => 'required|string',
-            'trainer_id' => 'required|exists:trainers,id',
+            'trainer_id' => 'required|exists:users,id',
             'date' => 'required|date',
             'time' => 'required',
-            'price' => 'required|numeric|min:0',
-            'status' => 'in:pending,confirmed,canceled',
         ]);
-    
+        
         $reservation = new Reservation();
         $reservation->membre_id = Auth::id(); 
         $reservation->trainer_id = $request->trainer_id;
         $reservation->date = $request->date;
         $reservation->time = $request->time;
-        $reservation->price = $request->price;
         $reservation->status = $request->status ?? 'pending';
-         dd($reservation);
+
+        
         $reservation->save();
 
         return redirect()->back()->with('success', 'Votre réservation a bien été enregistrée.');
@@ -42,13 +39,15 @@ class ReservationController  extends Controller
     {
         $user = Auth::user(); 
         
-        $reservations = Reservation::where('membre_id', $user->id)->get();
-
+        // $reservations = Reservation::where('membre_id', $user->id)->get();
+        $reservations = Reservation::where('membre_id', $user->id)
+        ->with('trainer') 
+        ->get();
         return view('user.my-reservation', compact('reservations'));
     }
     public function showTrainer()
     {
-        $trainers = Trainer::all(); 
+        $trainers = User::where('role', 'trainer')->get(); 
         return view('entraineur', compact('trainers')); 
     }
 }

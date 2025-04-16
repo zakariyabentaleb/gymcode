@@ -17,11 +17,12 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     @forelse ($reservations as $reservation)
                         <div class="bg-white rounded-xl shadow-lg p-6">
-                            <h3 class="text-xl font-semibold text-brand-dark mb-2">{{ $reservation->program->name }}</h3>
+                            <h3 class="text-xl font-semibold text-brand-dark mb-2"> {{ $reservation->trainer->full_name ?? 'Inconnu' }}</h3>
                             <p class="text-gray-600 mb-4">Date: {{ $reservation->date }}</p>
+                            <p class="text-gray-600 mb-4">Date: {{ $reservation->time }}</p>
                             <p class="text-gray-600 mb-4">Status: <span class="text-brand-red">{{ ucfirst($reservation->status) }}</span></p>
                             <div class="flex justify-between items-center">
-                                <a href="{{ route('reservations.cancel', $reservation->id) }}" class="bg-red-700 text-white py-2 px-6 rounded-lg font-semibold hover:bg-red-800 transition duration-300">
+                                <a href="" class="bg-red-700 text-white py-2 px-6 rounded-lg font-semibold hover:bg-red-800 transition duration-300">
                                     Annuler
                                 </a>
                             </div>
