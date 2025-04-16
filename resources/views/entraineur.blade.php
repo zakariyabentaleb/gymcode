@@ -172,18 +172,15 @@
                 
                 <div class="lg:w-1/2 bg-white p-8 rounded-xl shadow-2xl">
                     <h3 class="text-2xl font-bold mb-6 text-brand-dark">Formulaire de Réservation</h3>
-                    <form>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <form action="{{ route('reserver') }}" method="POST" class="space-y-6">
+                        @csrf
+                        <div class="mb-6">
                             <div>
-                                <label for="firstName" class="block text-gray-700 mb-2">Prénom</label>
-                                <input type="text" id="firstName" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red">
+                                <label for="full_name" class="block text-gray-700 mb-2">full name</label>
+                                <input type="text" id="full_name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red">
                             </div>
-                            <div>
-                                <label for="lastName" class="block text-gray-700 mb-2">Nom</label>
-                                <input type="text" id="lastName" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red">
-                            </div>
+                            
                         </div>
-                        
                         <div class="mb-6">
                             <label for="email" class="block text-gray-700 mb-2">Email</label>
                             <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red">
@@ -196,14 +193,11 @@
                         
                         <div class="mb-6">
                             <label for="trainer" class="block text-gray-700 mb-2">Entraîneur souhaité</label>
-                            <select id="trainer" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red">
+                            <select id="trainer" name="trainer_id" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red" required>
                                 <option value="">Choisir un entraîneur</option>
-                                <option value="thomas">Thomas Laurent</option>
-                                <option value="sarah">Sarah Dubois</option>
-                                <option value="marc">Marc Renaud</option>
-                                <option value="emma">Emma Martin</option>
-                                <option value="lucas">Lucas Bernard</option>
-                                <option value="julie">Julie Moreau</option>
+                                @foreach ($trainers as $trainer)
+                                    <option value="{{ $trainer->id }}">{{ $trainer->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         
@@ -211,12 +205,17 @@
                             <label for="date" class="block text-gray-700 mb-2">Date souhaitée</label>
                             <input type="date" id="date" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red">
                         </div>
-                        
+
                         <div class="mb-6">
-                            <label for="message" class="block text-gray-700 mb-2">Votre objectif</label>
-                            <textarea id="message" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red" placeholder="Décrivez brièvement votre objectif sportif..."></textarea>
+                            <label for="time" class="block text-gray-700 mb-2">Heure souhaitée</label>
+                            <input type="time" id="time" name="time" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red" required>
                         </div>
-                        
+                   
+                       <div class="mb-6">
+                        <label for="price" class="block text-gray-700 mb-2">Prix (€)</label>
+                        <input type="number" step="0.01" id="price" name="price" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red" required>
+                      </div>
+        
                         <button type="submit" class="w-full bg-brand-red hover:bg-red-700 text-white py-3 px-6 rounded-lg font-semibold transition duration-300">Réserver ma séance</button>
                     </form>
                 </div>

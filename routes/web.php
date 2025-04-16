@@ -16,7 +16,9 @@ Route::get('/programmes',[ProgramController::class, 'showProgram'])->name('progr
 
 Route::get('/programmes-details/{id}', [ProgramController::class, 'showProgramDetails'])->name('programmes-details');
 
-Route::get('/coach', [EntraineurController::class,'showTrainer'])->name('entraineur');
+Route::get('/coach', [ReservationController::class,'showTrainer'])->name('entraineur');
+Route::post('/reserver', [ReservationController::class,'store'])->name('reserver');
+
 
 Route::get('/contact', function () {
     return view('contact');
