@@ -36,20 +36,14 @@
             <main class="flex-1 overflow-y-auto p-6 bg-gray-100">
                 <div class="mb-8 flex justify-between items-center">
                     <div>
-                        <h1 class="text-2xl font-bold text-gray-800">Gestion des Entraîneurs</h1>
-                        <p class="text-gray-600">Créez et gérez les entraîneurs</p>
+                        <h1 class="text-2xl font-bold text-gray-800">Gestion des Reservations</h1>
                     </div>
-                    <a href="">
-                        <button class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-300">
-                            <i class="fas fa-plus mr-2"></i>Nouvel Entraîneur
-                        </button>
-                    </a>
                 </div>
 
                 <!-- Trainer List -->
                 <div class="bg-white rounded-lg shadow p-6 mb-8">
                     <div class="p-6 border-b border-gray-200 flex justify-between items-center">
-                        <h2 class="text-lg font-semibold text-gray-800">Liste des Entraîneurs</h2>
+                        <h2 class="text-lg font-semibold text-gray-800">Liste des Reservationsx</h2>
                     </div>
                     <div class="p-6">
                         <div class="overflow-x-auto">
