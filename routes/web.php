@@ -87,3 +87,6 @@ Route::get('/trainers/{trainer}/edit', [EntraineurController::class, 'edit'])->n
 Route::put('/trainers/{trainer}', [EntraineurController::class, 'update'])->name('trainers.update');
 });
 
+Route::post('/reservation/{id}/cancel', [ReservationController::class, 'cancel'])->name('reservation.cancel');
+Route::delete('/reservation/{id}/delete', [ReservationController::class, 'destroy'])->name('reservation.destroy');
+Route::get('/reservations', [ReservationController::class, 'showAllReservations'])->name('reservations.show');

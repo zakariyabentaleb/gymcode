@@ -41,7 +41,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-300 hover:bg-gray-800">
+                    <a href="{{route('reservations.show')}}" class="flex items-center space-x-3 px-3 py-2 rounded-lg {{ request()->routeIs('reservations.*') ? 'bg-red-500 text-white' : 'text-gray-300 hover:bg-gray-800' }}">
                         <i class="fas fa-calendar-alt"></i>
                         <span>Réservations</span>
                     </a>
