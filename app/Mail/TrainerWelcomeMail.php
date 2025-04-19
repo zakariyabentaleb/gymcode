@@ -12,13 +12,13 @@ class TrainerWelcomeMail extends Mailable
     use Queueable, SerializesModels;
 
     public $trainer;
-    // public $password;
-
-    public function __construct(Trainer $trainer)
-    {
-        $this->trainer = $trainer;
-      
-    }
+    public $plainPassword;
+    
+    public function __construct($trainer, $plainPassword)
+{
+    $this->trainer = $trainer;
+    $this->plainPassword = $plainPassword;
+}
 
     public function build()
     {

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Trainer;
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -57,47 +59,60 @@ class EntraineurController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:trainers,email',
-            'specialty' => 'nullable|string|max:255',
-            'password' => 'required|string|min:8',
-            'description' => 'nullable|string',
-        ]);
-    
-        // Hashage du mot de passe
-       
-    
-        // Création du trainer
-        $trainer = Trainer::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'specialty' => $validated['specialty'] ?? null,
-            'role' => 'trainer',
-            'description' => $validated['description'] ?? null,
-            'password' => $validated['password'],
-            'terms_accepted' => true,
-        ]); 
-    
-        // Création d'un utilisateur lié (si nécessaire)
+{
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:trainers,email',
+        'specialty' => 'nullable|string|max:255',
+        'password' => 'required|string|min:8',
+        'description' => 'nullable|string',
+    ]);
+
+    // Stockage du mot de passe en clair temporairement
+    $plainPassword = $validated['password'];
+     
+    // Création du trainer avec mot de passe haché
+    $trainer = Trainer::create([
+        'name' => $validated['name'],
+        'email' => $validated['email'],
+        'specialty' => $validated['specialty'] ?? null,
+        'role' => 'trainer',
+        'description' => $validated['description'] ?? null,
+        'password' => bcrypt($plainPassword),
+        'terms_accepted' => true,
+    ]); 
+     
+    // Création d'un utilisateur lié (si nécessaire)
+    // User::create([
+    //     'full_name' => $validated['name'],
+    //     'email' => $validated['email'],
+    //     'role' => 'trainer',
+    //     'password' => bcrypt($plainPassword),
+    //     'terms_accepted' => true,
+    // ]);
+
+    try {
         User::create([
             'full_name' => $validated['name'],
             'email' => $validated['email'],
             'role' => 'trainer',
-            'password' => $validated['password'],
+            'password' => bcrypt($plainPassword),
             'terms_accepted' => true,
         ]);
-    
-        // Envoi de l'email
-        try {
-            Mail::to($trainer->email)->send(new TrainerWelcomeMail($trainer));
-            return redirect()->route('programs.store')->with('success', 'Entraîneur ajouté avec succès et email envoyé.');
-        } catch (\Exception $e) {
-            Log::error('Failed to send email to trainer: ' . $e->getMessage());
-            return redirect()->route('trainer.index')->with('error', 'Entraîneur ajouté mais l\'email n\'a pas pu être envoyé.');
-        }
+    } catch (\Exception $e) {
+        dd('Erreur création user :', $e->getMessage());
     }
+
+    // Envoi de l'e-mail avec le mot de passe en clair
+    try {
+        Mail::to($trainer->email)->send(new TrainerWelcomeMail($trainer, $plainPassword));
+        return redirect()->route('programs.store')->with('success', 'Entraîneur ajouté avec succès et email envoyé.');
+    } catch (\Exception $e) {
+        Log::error('Échec de l\'envoi de l\'email à l\'entraîneur : ' . $e->getMessage());
+        return redirect()->route('trainer.index')->with('error', 'Entraîneur ajouté mais l\'email n\'a pas pu être envoyé.');
+    }
+}
+
     
     public function edit(Trainer $trainer)
     {
@@ -125,4 +140,68 @@ class EntraineurController extends Controller
     
         return redirect()->route('trainer.show');
     }
+    public function trainerDashboard()
+{
+    $trainer_id = Auth::id();
+    
+    // Get reservation stats
+    $totalReservations = Reservation::where('trainer_id', $trainer_id)->count();
+    $pendingReservations = Reservation::where('trainer_id', $trainer_id)
+                            ->where('status', 'pending')->count();
+    $confirmedReservations = Reservation::where('trainer_id', $trainer_id)
+                            ->where('status', 'confirmed')->count();
+    $canceledReservations = Reservation::where('trainer_id', $trainer_id)
+                            ->where('status', 'canceled')->count();
+    
+    // Get pending reservations for approval
+    $pendingList = Reservation::where('trainer_id', $trainer_id)
+                    ->where('status', 'pending')
+                    ->with('membre')
+                    ->orderBy('date')
+                    ->orderBy('time')
+                    ->get();
+    
+    // Get today's confirmed sessions
+    $today = date('Y-m-d');
+    $todaysSessions = Reservation::where('trainer_id', $trainer_id)
+                      ->where('status', 'confirmed')
+                      ->where('date', $today)
+                      ->with('membre')
+                      ->orderBy('time')
+                      ->get();
+    
+    // Get recent canceled sessions
+    $recentCanceled = Reservation::where('trainer_id', $trainer_id)
+                      ->where('status', 'canceled')
+                      ->where('date', '>=', date('Y-m-d', strtotime('-7 days')))
+                      ->with('membre')
+                      ->orderBy('date', 'desc')
+                      ->orderBy('time')
+                      ->limit(5)
+                      ->get();
+    
+    // Weekly schedule (simplified)
+    $weekStart = date('Y-m-d', strtotime('monday this week'));
+    $weekEnd = date('Y-m-d', strtotime('sunday this week'));
+    
+    $weeklySchedule = Reservation::where('trainer_id', $trainer_id)
+                      ->whereBetween('date', [$weekStart, $weekEnd])
+                      ->where('status', 'confirmed')
+                      ->with('membre')
+                      ->orderBy('date')
+                      ->orderBy('time')
+                      ->get();
+    
+    return view('trainer.dashboard', compact(
+        'totalReservations', 
+        'pendingReservations', 
+        'confirmedReservations', 
+        'canceledReservations',
+        'pendingList',
+        'todaysSessions',
+        'recentCanceled',
+        'weeklySchedule',
+        'weekStart'
+    ));
+}
 }

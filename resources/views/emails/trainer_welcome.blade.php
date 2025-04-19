@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,7 @@
     <h1>Bienvenue {{ $trainer->name }} !</h1>
     <p>Un compte a été créé pour vous sur notre plateforme.</p>
     <p><strong>Email :</strong> {{ $trainer->email }}</p>
-    <p><strong>Mot de passe :</strong> {{ $trainer->password }} </p>
+    <p><strong>Mot de passe :</strong> {{ $plainPassword }}</p>
     <p>Vous pouvez maintenant vous connecter et gérer vos programmes.</p>
     <p>Merci !</p>
 </body>

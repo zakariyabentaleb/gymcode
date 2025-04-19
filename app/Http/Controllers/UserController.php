@@ -62,6 +62,10 @@ class UserController extends Controller
             $user = Auth::user();
             if ($user->role === 'admin') {
                 return redirect()->intended('/admin-dashboard'); 
+            } else if ($user->role === 'member') {
+                return redirect()->intended('/home');
+            } else if ($user->role === 'trainer') {
+                return redirect()->intended('/trainer-dashboard');
             } else {
                 return redirect()->intended(''); 
             }

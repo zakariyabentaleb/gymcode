@@ -90,3 +90,8 @@ Route::put('/trainers/{trainer}', [EntraineurController::class, 'update'])->name
 Route::post('/reservation/{id}/cancel', [ReservationController::class, 'cancel'])->name('reservation.cancel');
 Route::delete('/reservation/{id}/delete', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 Route::get('/reservations', [ReservationController::class, 'showAllReservations'])->name('reservations.show');
+
+
+Route::get('/trainer', function () {
+    return view('trainer.dashboard');
+})->name('trainer-dashboard');
