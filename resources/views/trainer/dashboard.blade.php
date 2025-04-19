@@ -65,15 +65,24 @@
                     </li>
                 </ul>
             </nav>
-            <div class="p-4 border-t border-gray-700">
-                <div class="flex items-center">
-                    <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Profile" class="w-10 h-10 rounded-full">
-                    <div class="ml-3">
-                        <p class="text-sm font-medium">{{ Auth::user()->name }}</p>
+            <div class="p-4 border-t border-gray-700 bg-gray-800">
+                <div class="flex items-center mb-4">
+                    <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Profile" class="w-10 h-10 rounded-full border border-gray-600">
+                    <div class="ml-3 text-white">
+                        <p class="text-sm font-semibold">{{ Auth::user()->full_name }}</p>
                         <p class="text-xs text-gray-400">Senior Trainer</p>
                     </div>
                 </div>
+            
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="w-full flex items-center gap-2 text-sm text-white px-4 py-2 bg-gray-700 rounded-md hover:bg-gray-600 transition duration-200">
+                        <i class="fas fa-sign-out-alt w-4 h-4"></i>
+                        <span>Déconnexion</span>
+                    </button>
+                </form>
             </div>
+            
         </aside>
 
         <!-- Main Content -->
