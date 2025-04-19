@@ -69,7 +69,7 @@
                 <div class="flex items-center">
                     <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Profile" class="w-10 h-10 rounded-full">
                     <div class="ml-3">
-                        <p class="text-sm font-medium">Alex Johnson</p>
+                        <p class="text-sm font-medium">{{ Auth::user()->name }}</p>
                         <p class="text-xs text-gray-400">Senior Trainer</p>
                     </div>
                 </div>
@@ -113,10 +113,12 @@
                     <div class="bg-white rounded-lg shadow p-6">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-gray-500 text-sm font-medium">Total Reservations</h3>
-                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">+3 today</span>
+                            @if(isset($newToday) && $newToday > 0)
+                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">+{{ $newToday }} today</span>
+                            @endif
                         </div>
                         <div class="flex items-center">
-                            <span class="text-3xl font-bold text-gray-800">42</span>
+                            <span class="text-3xl font-bold text-gray-800">{{ $totalReservations }}</span>
                             <div class="w-10 h-10 ml-auto bg-blue-500 text-white rounded-full flex items-center justify-center">
                                 <i class="fas fa-calendar-check"></i>
                             </div>
@@ -128,7 +130,7 @@
                             <h3 class="text-gray-500 text-sm font-medium">Pending Approval</h3>
                         </div>
                         <div class="flex items-center">
-                            <span class="text-3xl font-bold text-gray-800">8</span>
+                            <span class="text-3xl font-bold text-gray-800">{{ $pendingReservations }}</span>
                             <div class="w-10 h-10 ml-auto bg-yellow-500 text-white rounded-full flex items-center justify-center">
                                 <i class="fas fa-clock"></i>
                             </div>
@@ -138,10 +140,12 @@
                     <div class="bg-white rounded-lg shadow p-6">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-gray-500 text-sm font-medium">Confirmed Sessions</h3>
-                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">+2 today</span>
+                            @if(isset($newConfirmed) && $newConfirmed > 0)
+                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">+{{ $newConfirmed }} today</span>
+                            @endif
                         </div>
                         <div class="flex items-center">
-                            <span class="text-3xl font-bold text-gray-800">28</span>
+                            <span class="text-3xl font-bold text-gray-800">{{ $confirmedReservations }}</span>
                             <div class="w-10 h-10 ml-auto bg-green-500 text-white rounded-full flex items-center justify-center">
                                 <i class="fas fa-check"></i>
                             </div>
@@ -153,7 +157,7 @@
                             <h3 class="text-gray-500 text-sm font-medium">Canceled Sessions</h3>
                         </div>
                         <div class="flex items-center">
-                            <span class="text-3xl font-bold text-gray-800">6</span>
+                            <span class="text-3xl font-bold text-gray-800">{{ $canceledReservations }}</span>
                             <div class="w-10 h-10 ml-auto bg-red-500 text-white rounded-full flex items-center justify-center">
                                 <i class="fas fa-times"></i>
                             </div>
@@ -187,90 +191,46 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
+                                    @forelse($pendingList as $reservation)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
-                                                <img class="h-8 w-8 rounded-full" src="https://randomuser.me/api/portraits/women/32.jpg" alt="">
+                                                <img class="h-8 w-8 rounded-full" src="https://randomuser.me/api/portraits/{{ $loop->odd ? 'women' : 'men' }}/{{ ($loop->index * 10) + 22 }}.jpg" alt="">
                                                 <div class="ml-4">
-                                                    <div class="text-sm font-medium text-gray-900">Emily Wilson</div>
-                                                    <div class="text-sm text-gray-500">emily.wilson@example.com</div>
+                                                    <div class="text-sm font-medium text-gray-900">{{ $reservation->membre->name }}</div>
+                                                    <div class="text-sm text-gray-500">{{ $reservation->membre->email }}</div>
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">Apr 19, 2025</div>
+                                            <div class="text-sm text-gray-900">{{ date('M d, Y', strtotime($reservation->date)) }}</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">09:00 AM</div>
+                                            <div class="text-sm text-gray-900">{{ date('h:i A', strtotime($reservation->time)) }}</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <button class="bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-600 mr-2">
-                                                <i class="fas fa-check mr-1"></i>Confirm
-                                            </button>
-                                            <button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600">
-                                                <i class="fas fa-times mr-1"></i>Cancel
-                                            </button>
+                                            <form action="{{ route('trainer.confirm.reservation', $reservation->id) }}" method="POST" class="inline">
+                                                @csrf
+                                                <button type="submit" class="bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-600 mr-2">
+                                                    <i class="fas fa-check mr-1"></i>Confirm
+                                                </button>
+                                            </form>
+                                            <form action="{{ route('trainer.cancel.reservation', $reservation->id) }}" method="POST" class="inline">
+                                                @csrf
+                                                <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600">
+                                                    <i class="fas fa-times mr-1"></i>Cancel
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
+                                    @empty
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                <img class="h-8 w-8 rounded-full" src="https://randomuser.me/api/portraits/men/45.jpg" alt="">
-                                                <div class="ml-4">
-                                                    <div class="text-sm font-medium text-gray-900">Marcus Brown</div>
-                                                    <div class="text-sm text-gray-500">marcus.brown@example.com</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">Apr 19, 2025</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">11:30 AM</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <button class="bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-600 mr-2">
-                                                <i class="fas fa-check mr-1"></i>Confirm
-                                            </button>
-                                            <button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600">
-                                                <i class="fas fa-times mr-1"></i>Cancel
-                                            </button>
-                                        </td>
+                                        <td colspan="5" class="px-6 py-4 text-center text-gray-500">No pending reservations found</td>
                                     </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                <img class="h-8 w-8 rounded-full" src="https://randomuser.me/api/portraits/women/68.jpg" alt="">
-                                                <div class="ml-4">
-                                                    <div class="text-sm font-medium text-gray-900">Sarah Chen</div>
-                                                    <div class="text-sm text-gray-500">sarah.chen@example.com</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">Apr 20, 2025</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">02:00 PM</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <button class="bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-600 mr-2">
-                                                <i class="fas fa-check mr-1"></i>Confirm
-                                            </button>
-                                            <button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600">
-                                                <i class="fas fa-times mr-1"></i>Cancel
-                                            </button>
-                                        </td>
-                                    </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
@@ -279,80 +239,33 @@
 
                 <!-- Upcoming and Recent Reservations -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <!-- Upcoming Confirmed Sessions -->
+                    <!-- Today's Confirmed Sessions -->
                     <div class="bg-white rounded-lg shadow">
                         <div class="p-6 border-b border-gray-200">
                             <h2 class="text-lg font-semibold text-gray-800">Today's Confirmed Sessions</h2>
                         </div>
                         <div class="p-6">
                             <div class="space-y-4">
+                                @forelse($todaysSessions as $session)
                                 <div class="flex items-center p-3 bg-gray-50 rounded-lg border-l-4 border-green-500">
                                     <div class="bg-green-100 text-green-800 rounded-lg w-16 h-16 flex flex-col items-center justify-center">
-                                        <span class="text-sm font-bold">07:30</span>
-                                        <span class="text-xs">08:30</span>
+                                        <span class="text-sm font-bold">{{ date('H:i', strtotime($session->time)) }}</span>
+                                        <span class="text-xs">{{ date('H:i', strtotime($session->time . ' +1 hour')) }}</span>
                                     </div>
                                     <div class="ml-4 flex-1">
                                         <div class="flex justify-between">
-                                            <h3 class="font-medium text-gray-800">Personal Training</h3>
+                                            <h3 class="font-medium text-gray-800">{{ $session->training_type ?? 'Personal Training' }}</h3>
                                             <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Confirmed</span>
                                         </div>
                                         <div class="flex items-center mt-1">
-                                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Client" class="w-5 h-5 rounded-full">
-                                            <p class="text-sm text-gray-500 ml-2">Emily Wilson</p>
+                                            <img src="https://randomuser.me/api/portraits/{{ $loop->odd ? 'women' : 'men' }}/{{ ($loop->index * 12) + 32 }}.jpg" alt="Client" class="w-5 h-5 rounded-full">
+                                            <p class="text-sm text-gray-500 ml-2">{{ $session->membre->name }}</p>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="flex items-center p-3 bg-gray-50 rounded-lg border-l-4 border-green-500">
-                                    <div class="bg-green-100 text-green-800 rounded-lg w-16 h-16 flex flex-col items-center justify-center">
-                                        <span class="text-sm font-bold">09:00</span>
-                                        <span class="text-xs">10:00</span>
-                                    </div>
-                                    <div class="ml-4 flex-1">
-                                        <div class="flex justify-between">
-                                            <h3 class="font-medium text-gray-800">HIIT Training</h3>
-                                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Confirmed</span>
-                                        </div>
-                                        <div class="flex items-center mt-1">
-                                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Client" class="w-5 h-5 rounded-full">
-                                            <p class="text-sm text-gray-500 ml-2">Marcus Brown</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-center p-3 bg-gray-50 rounded-lg border-l-4 border-green-500">
-                                    <div class="bg-green-100 text-green-800 rounded-lg w-16 h-16 flex flex-col items-center justify-center">
-                                        <span class="text-sm font-bold">15:00</span>
-                                        <span class="text-xs">16:00</span>
-                                    </div>
-                                    <div class="ml-4 flex-1">
-                                        <div class="flex justify-between">
-                                            <h3 class="font-medium text-gray-800">Strength Training</h3>
-                                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Confirmed</span>
-                                        </div>
-                                        <div class="flex items-center mt-1">
-                                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client" class="w-5 h-5 rounded-full">
-                                            <p class="text-sm text-gray-500 ml-2">Sarah Chen</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-center p-3 bg-gray-50 rounded-lg border-l-4 border-green-500">
-                                    <div class="bg-green-100 text-green-800 rounded-lg w-16 h-16 flex flex-col items-center justify-center">
-                                        <span class="text-sm font-bold">17:30</span>
-                                        <span class="text-xs">18:30</span>
-                                    </div>
-                                    <div class="ml-4 flex-1">
-                                        <div class="flex justify-between">
-                                            <h3 class="font-medium text-gray-800">Yoga Session</h3>
-                                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Confirmed</span>
-                                        </div>
-                                        <div class="flex items-center mt-1">
-                                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Client" class="w-5 h-5 rounded-full">
-                                            <p class="text-sm text-gray-500 ml-2">Emma Davis</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                @empty
+                                <div class="p-4 text-center text-gray-500">No confirmed sessions for today</div>
+                                @endforelse
                             </div>
                         </div>
                     </div>
@@ -364,65 +277,29 @@
                         </div>
                         <div class="p-6">
                             <div class="space-y-4">
+                                @forelse($recentCanceled as $canceled)
                                 <div class="flex items-center p-3 bg-gray-50 rounded-lg border-l-4 border-red-500">
                                     <div class="bg-red-100 text-red-800 rounded-lg w-16 h-16 flex flex-col items-center justify-center">
-                                        <span class="text-sm">Apr 17</span>
-                                        <span class="text-xs">10:00</span>
+                                        <span class="text-sm">{{ date('M d', strtotime($canceled->date)) }}</span>
+                                        <span class="text-xs">{{ date('H:i', strtotime($canceled->time)) }}</span>
                                     </div>
                                     <div class="ml-4">
-                                        <h3 class="font-medium text-gray-800">Cardio Training</h3>
+                                        <h3 class="font-medium text-gray-800">{{ $canceled->training_type ?? 'Training Session' }}</h3>
                                         <div class="flex items-center mt-1">
-                                            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Client" class="w-5 h-5 rounded-full">
-                                            <p class="text-sm text-gray-500 ml-2">Ryan Thompson</p>
+                                            <img src="https://randomuser.me/api/portraits/{{ $loop->odd ? 'men' : 'women' }}/{{ ($loop->index * 12) + 22 }}.jpg" alt="Client" class="w-5 h-5 rounded-full">
+                                            <p class="text-sm text-gray-500 ml-2">{{ $canceled->membre->name }}</p>
                                         </div>
-                                        <p class="text-xs text-gray-500 mt-1">Reason: Client illness</p>
+                                        <p class="text-xs text-gray-500 mt-1">Reason: {{ $canceled->cancel_reason ?? 'Not specified' }}</p>
                                     </div>
                                     <div class="ml-auto">
-                                        <button class="text-sm text-blue-500 hover:text-blue-700">
+                                        <a href="{{ route('trainer.reschedule.form', $canceled->id) }}" class="text-sm text-blue-500 hover:text-blue-700">
                                             <i class="fas fa-redo mr-1"></i>Reschedule
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
-
-                                <div class="flex items-center p-3 bg-gray-50 rounded-lg border-l-4 border-red-500">
-                                    <div class="bg-red-100 text-red-800 rounded-lg w-16 h-16 flex flex-col items-center justify-center">
-                                        <span class="text-sm">Apr 16</span>
-                                        <span class="text-xs">14:30</span>
-                                    </div>
-                                    <div class="ml-4">
-                                        <h3 class="font-medium text-gray-800">Weight Training</h3>
-                                        <div class="flex items-center mt-1">
-                                            <img src="https://randomuser.me/api/portraits/women/56.jpg" alt="Client" class="w-5 h-5 rounded-full">
-                                            <p class="text-sm text-gray-500 ml-2">Lisa Morgan</p>
-                                        </div>
-                                        <p class="text-xs text-gray-500 mt-1">Reason: Schedule conflict</p>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <button class="text-sm text-blue-500 hover:text-blue-700">
-                                            <i class="fas fa-redo mr-1"></i>Reschedule
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-center p-3 bg-gray-50 rounded-lg border-l-4 border-red-500">
-                                    <div class="bg-red-100 text-red-800 rounded-lg w-16 h-16 flex flex-col items-center justify-center">
-                                        <span class="text-sm">Apr 15</span>
-                                        <span class="text-xs">16:00</span>
-                                    </div>
-                                    <div class="ml-4">
-                                        <h3 class="font-medium text-gray-800">Mobility Session</h3>
-                                        <div class="flex items-center mt-1">
-                                            <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Client" class="w-5 h-5 rounded-full">
-                                            <p class="text-sm text-gray-500 ml-2">David Jones</p>
-                                        </div>
-                                        <p class="text-xs text-gray-500 mt-1">Reason: Trainer unavailable</p>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <button class="text-sm text-blue-500 hover:text-blue-700">
-                                            <i class="fas fa-redo mr-1"></i>Reschedule
-                                        </button>
-                                    </div>
-                                </div>
+                                @empty
+                                <div class="p-4 text-center text-gray-500">No recently canceled sessions</div>
+                                @endforelse
                             </div>
                         </div>
                     </div>
@@ -433,12 +310,12 @@
                     <div class="p-6 border-b border-gray-200 flex justify-between items-center">
                         <h2 class="text-lg font-semibold text-gray-800">Weekly Schedule</h2>
                         <div class="flex space-x-2">
-                            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm hover:bg-gray-300 transition duration-300">
+                            <a href="{{ route('trainer-dashboard', ['week' => date('Y-m-d', strtotime($weekStart . ' -1 week'))]) }}" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm hover:bg-gray-300 transition duration-300">
                                 <i class="fas fa-chevron-left mr-2"></i>Previous Week
-                            </button>
-                            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm hover:bg-gray-300 transition duration-300">
+                            </a>
+                            <a href="{{ route('trainer-dashboard', ['week' => date('Y-m-d', strtotime($weekStart . ' +1 week'))]) }}" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm hover:bg-gray-300 transition duration-300">
                                 Next Week<i class="fas fa-chevron-right ml-2"></i>
-                            </button>
+                            </a>
                         </div>
                     </div>
                     <div class="p-6 overflow-x-auto">
@@ -448,16 +325,63 @@
                                 <div class="bg-gray-50 p-2 rounded-lg">
                                     <div class="text-center font-medium text-gray-500 mb-4">Time</div>
                                     <div class="space-y-8">
-                                        <div class="text-sm text-gray-500 h-12 flex items-center justify-center">07:00</div>
-                                        <div class="text-sm text-gray-500 h-12 flex items-center justify-center">09:00</div>
-                                        <div class="text-sm text-gray-500 h-12 flex items-center justify-center">11:00</div>
-                                        <div class="text-sm text-gray-500 h-12 flex items-center justify-center">13:00</div>
-                                        <div class="text-sm text-gray-500 h-12 flex items-center justify-center">15:00</div>
-                                        <div class="text-sm text-gray-500 h-12 flex items-center justify-center">17:00</div>
-                                        <div class="text-sm text-gray-500 h-12 flex items-center justify-center">19:00</div>
+                                        @for ($hour = 7; $hour <= 19; $hour += 2)
+                                            <div class="text-sm text-gray-500 h-12 flex items-center justify-center">{{ sprintf('%02d:00', $hour) }}</div>
+                                        @endfor
                                     </div>
                                 </div>
                                 
-                                <!-- Monday -->
+                                @php
+                                    $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                                    $dayDates = [];
+                                    
+                                    for ($i = 0; $i < 7; $i++) {
+                                        $currentDate = date('Y-m-d', strtotime($weekStart . ' +' . $i . ' days'));
+                                        $dayDates[$days[$i]] = $currentDate;
+                                    }
+                                @endphp
+                
+                                @foreach($days as $day)
                                 <div class="bg-gray-50 p-2 rounded-lg">
-                                    <div class="text-center font
+                                    <div class="text-center font-medium text-gray-500 mb-4">
+                                        {{ $day }}<br>
+                                        <span class="text-xs">{{ date('M d', strtotime($dayDates[$day])) }}</span>
+                                    </div>
+                                    
+                                    <div class="relative h-96">
+                                        @foreach($weeklySchedule as $schedule)
+                                            @if(date('Y-m-d', strtotime($schedule->date)) == $dayDates[$day])
+                                                @php
+                                                    $startTime = strtotime($schedule->time);
+                                                    $startHour = (int)date('H', $startTime);
+                                                    $startMinute = (int)date('i', $startTime);
+                                                    
+                                                    // Calculate position from 7:00 (in pixels)
+                                                    $topPosition = (($startHour - 7) * 48) + ($startMinute / 60 * 48);
+                                                    
+                                                    // Default session length (1 hour)
+                                                    $sessionLength = 60; // minutes
+                                                    
+                                                    // Calculate height based on session length
+                                                    $height = ($sessionLength / 60) * 48;
+                                                @endphp
+                                                
+                                                <div class="absolute bg-blue-100 border-l-4 border-blue-500 rounded p-1 text-xs"
+                                                     style="top: {{ $topPosition }}px; left: 2px; right: 2px; height: {{ $height }}px; z-index: 10;">
+                                                    <div class="font-medium">{{ date('H:i', $startTime) }}</div>
+                                                    <div class="truncate">{{ $schedule->membre->name }}</div>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

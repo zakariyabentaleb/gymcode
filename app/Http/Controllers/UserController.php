@@ -63,9 +63,9 @@ class UserController extends Controller
             if ($user->role === 'admin') {
                 return redirect()->intended('/admin-dashboard'); 
             } else if ($user->role === 'member') {
-                return redirect()->intended('/home');
+                return redirect()->intended('');
             } else if ($user->role === 'trainer') {
-                return redirect()->intended('/trainer-dashboard');
+                return redirect()->intended('/trainer');
             } else {
                 return redirect()->intended(''); 
             }
@@ -75,7 +75,7 @@ class UserController extends Controller
              'email' => 'Ces identifiants ne correspondent pas à nos enregistrements.',
          ]);
      }
-
+     
     public function show(User $user)
     {
         return view('users.show', compact('user'));

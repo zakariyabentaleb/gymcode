@@ -92,6 +92,6 @@ Route::delete('/reservation/{id}/delete', [ReservationController::class, 'destro
 Route::get('/reservations', [ReservationController::class, 'showAllReservations'])->name('reservations.show');
 
 
-Route::get('/trainer', function () {
-    return view('trainer.dashboard');
-})->name('trainer-dashboard');
+Route::get('/trainer', [EntraineurController::class, 'trainerDashboard'])->name('trainer-dashboard');
+Route::post('/trainer/reservations/{reservation}/confirm', [EntraineurController::class, 'confirmReservation'])->name('trainer.confirm.reservation');
+Route::post('/trainer/reservations/{reservation}/cancel', [EntraineurController::class,'cancelReservation'])->name('trainer.cancel.reservation');

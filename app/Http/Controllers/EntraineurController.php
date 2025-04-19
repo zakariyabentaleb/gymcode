@@ -181,16 +181,16 @@ class EntraineurController extends Controller
                       ->get();
     
     // Weekly schedule (simplified)
-    $weekStart = date('Y-m-d', strtotime('monday this week'));
-    $weekEnd = date('Y-m-d', strtotime('sunday this week'));
-    
-    $weeklySchedule = Reservation::where('trainer_id', $trainer_id)
-                      ->whereBetween('date', [$weekStart, $weekEnd])
-                      ->where('status', 'confirmed')
-                      ->with('membre')
-                      ->orderBy('date')
-                      ->orderBy('time')
-                      ->get();
+    $weekStart = request('week') ? date('Y-m-d', strtotime(request('week'))) : date('Y-m-d', strtotime('monday this week'));
+$weekEnd = date('Y-m-d', strtotime($weekStart . ' +6 days'));
+
+$weeklySchedule = Reservation::where('trainer_id', $trainer_id)
+                  ->whereBetween('date', [$weekStart, $weekEnd])
+                  ->where('status', 'confirmed')
+                  ->with('membre')
+                  ->orderBy('date')
+                  ->orderBy('time')
+                  ->get();
     
     return view('trainer.dashboard', compact(
         'totalReservations', 
@@ -203,5 +203,45 @@ class EntraineurController extends Controller
         'weeklySchedule',
         'weekStart'
     ));
+}
+
+public function confirmReservation(Reservation $reservation)
+{
+
+    if ($reservation->trainer_id !== Auth::id()) {
+        return redirect()->back()->with('error', 'Unauthorized action.');
+    }
+    
+    
+    if ($reservation->status !== 'pending') {
+        return redirect()->back()->with('warning', 'Only pending reservations can be confirmed.');
+    }
+    
+   
+    $reservation->status = 'confirmed';
+    $reservation->save();
+    
+    
+    
+    return redirect()->back()->with('success', 'Reservation confirmed successfully.');
+}
+public function cancelReservation(Reservation $reservation)
+{
+
+    if ($reservation->trainer_id !== Auth::id()) {
+        return redirect()->back()->with('error', 'Unauthorized action.');
+    }
+    
+  
+    if (!in_array($reservation->status, ['pending', 'confirmed'])) {
+        return redirect()->back()->with('warning', 'This reservation cannot be canceled.');
+    }
+    
+    
+    $reservation->status = 'canceled';
+    $reservation->save();
+    
+    
+    return redirect()->back()->with('success', 'Reservation canceled successfully.');
 }
 }
