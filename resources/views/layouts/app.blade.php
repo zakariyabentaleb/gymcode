@@ -29,11 +29,14 @@
         }
     </script>
     <style>
+        body {
+            background-color: #F5F5F7;
+        }
         .hero-pattern {
             background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            /* background-attachment: fixed; */
         }
         .gradient-overlay {
             background: linear-gradient(90deg, rgba(15,17,18,0.95) 0%, rgba(15,17,18,0.8) 50%, rgba(15,17,18,0.6) 100%);

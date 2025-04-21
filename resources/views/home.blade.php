@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="absolute bottom-0 right-0 hidden lg:block">
-                <div class="relative w-64 h-64 bg-brand-red rounded-full opacity-10 animate-pulse-slow -mb-32 -mr-20"></div>
+                <div class="relative hidden w-64 h-64 bg-brand-red rounded-full opacity-10 animate-pulse-slow -mb-32 -mr-20"></div>
             </div>
         </div>
     </section>
