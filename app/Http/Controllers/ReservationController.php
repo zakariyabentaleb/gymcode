@@ -21,6 +21,16 @@ class ReservationController  extends Controller
             'time' => 'required|unique:reservations,time',
         ]);
         
+        $exists = Reservation::where('trainer_id', $request->trainer_id)
+        ->where('time', $request->time)
+        ->exists();
+
+    if ($exists) {
+        return redirect()->back()
+            ->withInput()
+            ->withErrors(['time' => 'Cette heure est déjà réservée pour cet entraîneur.']);
+    }
+    
         $reservation = new Reservation();
         $reservation->membre_id = Auth::id(); 
         $reservation->trainer_id = $request->trainer_id;

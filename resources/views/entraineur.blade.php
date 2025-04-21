@@ -204,8 +204,12 @@
                         <div class="mb-6">
                             <label for="time" class="block text-gray-700 mb-2">Heure souhaitée</label>
                             <input type="time" id="time" name="time" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-red" required>
+                        
+                            @if ($errors->has('time'))
+                                <p class="text-red-600 text-sm mt-1">{{ $errors->first('time') }}</p>
+                            @endif
                         </div>
-                   
+                        
                       
         
                         <button type="submit" class="w-full bg-brand-red hover:bg-red-700 text-white py-3 px-6 rounded-lg font-semibold transition duration-300">Réserver ma séance</button>
