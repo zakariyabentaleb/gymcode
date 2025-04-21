@@ -62,7 +62,7 @@
             </nav>
             <div class="p-4 border-t border-gray-700 bg-gray-800">
                 <div class="flex items-center mb-4">
-                    <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Profile" class="w-10 h-10 rounded-full border border-gray-600">
+                    <img src="{{ Storage::url(Auth::user()->photo) }}" alt="Profile" class="w-10 h-10 rounded-full border border-gray-600">
                     <div class="ml-3 text-white">
                         <p class="text-sm font-semibold">{{ Auth::user()->full_name }}</p>
                         <p class="text-xs text-gray-400">Senior Trainer</p>
