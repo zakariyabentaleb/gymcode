@@ -76,52 +76,39 @@ class UserController extends Controller
          ]);
      }
      
-    public function show(User $user)
-    {
-        return view('users.show', compact('user'));
-    }
-
-   
-    public function edit(User $user)
-    {
-        dd(Auth::user()->isAdmin());
-        if (Auth::id() !== $user->id && $user->role=='admin') {
-            return redirect()->back()->with('error', 'Vous n\'êtes pas autorisé à modifier ce profil.');
-        }
-
-        return view('users.edit', compact('user'));
-    }
-
-  
-    public function update(Request $request, User $user)
-    {
-        if (Auth::id() !== $user->id && !Auth::user()->isAdmin()) {
-            return redirect()->back()->with('error', 'Vous n\'êtes pas autorisé à modifier ce profil.');
-        }
-
-        $validated = $request->validate([
-            'full_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'role' => [Rule::in(['member', 'trainer'])],
-        ]);
-
-        $user->update($validated);
-
-        return redirect()->route('users.show', $user)->with('success', 'Profil mis à jour avec succès!');
-    }
-    
-
-   
-    public function destroy(User $user)
-    {
-        if (!Auth::user()->isAdmin()) {
-            return redirect()->back()->with('error', 'Vous n\'êtes pas autorisé à supprimer des utilisateurs.');
-        }
-
-        $user->delete();
-
-        return redirect()->route('users.index')->with('success', 'Utilisateur supprimé avec succès!');
-    }
+     public function show()
+     {
+         $user = Auth::user();
+         return view('profile.show', compact('user'));
+     }
+ 
+     public function edit()
+     {
+         $user = Auth::user();
+         return view('profile.edit', compact('user'));
+     }
+ 
+     public function update(Request $request)
+     {
+         $user = Auth::user();
+ 
+         $request->validate([
+             'name' => 'required|string|max:255',
+             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+             'password' => 'nullable|min:6|confirmed',
+         ]);
+ 
+         $user->full_name = $request->name;
+         $user->email = $request->email;
+ 
+         if ($request->filled('password')) {
+             $user->password = Hash::make($request->password);
+         }
+ 
+         $user->save();
+ 
+         return redirect()->route('profile.show')->with('success', 'Profil mis à jour avec succès.');
+     }
 
     public function showRegistrationForm()
     {

@@ -13,6 +13,9 @@
                 <a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Contact</a>
                 @auth
                 <a href="{{ route('reservation') }}" class="nav-link {{ request()->routeIs('reservation') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Mes Réservations</a>
+                <a href="{{ route('profile.show') }}" class="nav-link {{ request()->routeIs('profile.show') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Profil</a>
+               
+                
                 <form method="POST" action="{{ route('logout') }}" class="inline">
                     @csrf
                     <button type="submit" class="bg-brand-red hover:bg-red-700 transition duration-300 py-2 px-6 rounded-lg font-semibold">Déconnexion
@@ -36,7 +39,10 @@
                 <a href="{{ route('entraineur') }}" class="{{ request()->routeIs('entraineur') ? 'text-brand-red' : 'text-white' }} font-medium">Entraîneurs</a>
                 <a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'text-brand-red' : 'text-white' }} font-medium">Contact</a>
                 @auth
-                <a href="{{ route('reservation') }}" class="nav-link {{ request()->routeIs('reservation') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Mon Dashboard</a>
+                <a href="{{ route('reservation') }}" class="nav-link {{ request()->routeIs('reservation') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Mes Réservations</a>
+                <a href="{{ route('profile.show') }}" class="nav-link {{ request()->routeIs('profile.show') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Mon Profil</a>
+                <a href="{{ route('profile.edit') }}" class="nav-link {{ request()->routeIs('profile.edit') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Modifier Profil</a>
+
                 <form method="POST" action="{{ route('logout') }}" class="inline">
                     @csrf
                     <button type="submit" class="bg-brand-red hover:bg-red-700 transition duration-300 py-2 px-6 rounded-lg font-semibold">Déconnexion</button>

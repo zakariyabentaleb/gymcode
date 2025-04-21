@@ -95,3 +95,9 @@ Route::get('/reservations', [ReservationController::class, 'showAllReservations'
 Route::get('/trainer', [EntraineurController::class, 'trainerDashboard'])->name('trainer-dashboard');
 Route::post('/trainer/reservations/{reservation}/confirm', [EntraineurController::class, 'confirmReservation'])->name('trainer.confirm.reservation');
 Route::post('/trainer/reservations/{reservation}/cancel', [EntraineurController::class,'cancelReservation'])->name('trainer.cancel.reservation');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profil', [UserController::class, 'show'])->name('profile.show');
+    Route::get('/profil/modifier', [UserController::class, 'edit'])->name('profile.edit');
+    Route::post('/profil/update', [UserController::class, 'update'])->name('profile.update');
+});
