@@ -18,7 +18,7 @@ class ReservationController  extends Controller
             'email' => 'required|email',
             'trainer_id' => 'required|exists:users,id',
             'date' => 'required|date',
-            'time' => 'required',
+            'time' => 'required|unique:reservations,time',
         ]);
         
         $reservation = new Reservation();

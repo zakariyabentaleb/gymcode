@@ -27,9 +27,15 @@ class EntraineurController extends Controller
     }
     public function show()
     {
-        $trainers = Trainer::all(); 
+        // $trainers = Trainer::all(); 
+        $trainers = User::where('role', 'trainer')->get(); 
         return view('admin.trainer', compact('trainers')); 
     }
+    // public function showTrainer()
+    // {
+    //     $trainers = User::where('role', 'trainer')->get(); 
+    //     return view('entraineur', compact('trainers')); 
+    // }
     // public function store(Request $request)
     // {
         
@@ -96,6 +102,8 @@ class EntraineurController extends Controller
             'full_name' => $validated['name'],
             'email' => $validated['email'],
             'role' => 'trainer',
+            'specialty' => $validated['specialty'] ?? null,
+            'description' => $request->description ?? null,
             'password' => bcrypt($plainPassword),
             'terms_accepted' => true,
         ]);

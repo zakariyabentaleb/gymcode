@@ -71,7 +71,7 @@
                                                     <i class="fas fa-user-tie"></i>
                                                 </div>
                                                 <div class="ml-4">
-                                                    <div class="text-sm font-medium text-gray-900">{{$trainer->name}}</div>
+                                                    <div class="text-sm font-medium text-gray-900">{{$trainer->full_name}}</div>
                                                 </div>
                                             </div>
                                         </td>
