@@ -77,7 +77,8 @@
                 @foreach ($trainers as $trainer)
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden trainer-card transition duration-500">
                     <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd" alt="Thomas Laurent" class="w-full h-80 object-cover">
+                        
+                        <img src="{{ Storage::url($trainer->photo) }}" alt="Thomas Laurent" class="w-full h-80 object-cover">
                         <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-dark to-transparent py-6 px-6">
                             <h3 class="text-white font-bold text-xl">{{$trainer->full_name}}</h3>
                             <p class="text-gray-300">Coach de musculation</p>

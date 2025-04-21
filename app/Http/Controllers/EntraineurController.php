@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use App\Mail\TrainerWelcomeMail;
 
+
 class EntraineurController extends Controller
 {
     public function index()
@@ -70,6 +71,7 @@ class EntraineurController extends Controller
         'name' => 'required|string|max:255',
         'email' => 'required|email|unique:trainers,email',
         'specialty' => 'nullable|string|max:255',
+        'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         'password' => 'required|string|min:8',
         'description' => 'nullable|string',
     ]);
@@ -96,15 +98,22 @@ class EntraineurController extends Controller
     //     'password' => bcrypt($plainPassword),
     //     'terms_accepted' => true,
     // ]);
+    $photoPath = null;
+
+if ($request->hasFile('photo')) {
+    $photoPath = $request->file('photo')->store('photos', 'public'); // Stock dans storage/app/public/photos
+}
 
     try {
         User::create([
             'full_name' => $validated['name'],
             'email' => $validated['email'],
             'role' => 'trainer',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'specialty' => $validated['specialty'] ?? null,
             'description' => $request->description ?? null,
             'password' => bcrypt($plainPassword),
+            'photo' => $photoPath, 
             'terms_accepted' => true,
         ]);
     } catch (\Exception $e) {

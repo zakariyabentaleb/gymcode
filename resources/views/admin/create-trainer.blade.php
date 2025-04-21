@@ -47,7 +47,7 @@
                         
                             <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow">
                                 <h2 class="text-lg font-semibold text-gray-800 mb-4">Formulaire d'ajout</h2>
-                                <form action="{{ route('trainer.store') }}" method="POST">
+                                <form action="{{ route('trainer.store') }}" method="POST" enctype="multipart/form-data" >
                                     @csrf
                                     <div class="mb-4">
                                         <label class="block text-gray-700">Nom</label>
@@ -67,6 +67,11 @@
                                     <div class="mb-4">
                                         <label class="block text-gray-700">Rôle</label>
                                         <input type="text" name="role" value="trainer" class="w-full mt-1 p-2 border rounded-lg" readonly>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700">Photo</label>
+                                        <input type="file" name="photo" class="w-full mt-1 p-2 border rounded-lg">
                                     </div>
                                 
                                     <div class="mb-4">
