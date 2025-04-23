@@ -131,22 +131,21 @@ if ($request->hasFile('photo')) {
 }
 
     
-    public function edit(Trainer $trainer)
+    public function edit(User $trainer)
     {
         return view('admin.edit-trainer', compact('trainer'));
     }
-    public function update(Request $request, Trainer $trainer)
+    public function update(Request $request, User $trainer)
     {
     
         $trainerData = $request->validate([
-            'name' => 'required|string|max:255',
+            'full_name' => 'required|string|max:255',
             'email' => 'required|email',
             'specialty' => 'required|string',
         ]);
     
-      
         $trainer->update($trainerData);
-    
+         
       
         return redirect()->route('trainer.show');
     }

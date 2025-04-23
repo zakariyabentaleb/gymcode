@@ -79,5 +79,6 @@ class PaymentController extends Controller
     {
         return view('payments.cancel');
     }
+    
 }
 

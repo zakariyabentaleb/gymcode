@@ -53,7 +53,7 @@
                                     
                                     <div class="mb-4">
                                         <label class="block text-gray-700 font-medium">Nom</label>
-                                        <input type="text" name="name" value="{{ $trainer->name }}" class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-red-300">
+                                        <input type="text" name="full_name" value="{{ $trainer->full_name }}" class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-red-300">
                                     </div>
             
                                     <div class="mb-4">
