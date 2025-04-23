@@ -26,6 +26,11 @@ class User extends Authenticatable
         'role',
         'terms_accepted',
     ];
+   
+    public function payments()
+{
+    return $this->hasMany(Payment::class);
+}
 
     /**
      * The attributes that should be hidden for serialization.

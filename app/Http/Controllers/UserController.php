@@ -127,5 +127,11 @@ class UserController extends Controller
     {
         return view('user.my-reservation');
     }
+    public function showPayingMembers()
+{
+    $users = User::whereHas('payments')->with('payments.program')->get();
+   
+    return view('admin.membres', compact('users'));
+}
     
 }

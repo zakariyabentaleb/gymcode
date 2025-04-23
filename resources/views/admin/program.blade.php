@@ -128,8 +128,8 @@
                                         <tr>
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
-                                                    <div class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center text-white">
-                                                        <i class="fas fa-dumbbell"></i>
+                                                    <div class="h-10 w-10">
+                                                        <img src="{{ Storage::url($program->image_url) }}" class="h-full w-full object-cover rounded-full" alt="">
                                                     </div>
                                                     <div class="ml-4">
                                                         <div class="text-sm font-medium text-gray-900">{{$program->title}}</div>
@@ -137,7 +137,6 @@
                                                     </div>
                                                 </div>
                                             </td>
-
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">{{$program->category->name}}</span>
                                             </td>

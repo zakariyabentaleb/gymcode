@@ -87,6 +87,8 @@ Route::delete('/trainers/{trainer}', [EntraineurController::class, 'destroy'])->
 Route::get('/trainers/{trainer}/edit', [EntraineurController::class, 'edit'])->name('trainers.edit');
 Route::put('/trainers/{trainer}', [EntraineurController::class, 'update'])->name('trainers.update');
 Route::get('/payments', [PaymentController::class, 'showPayments'])->name('payments.index');
+Route::get('/membres', [UserController::class, 'showPayingMembers'])->name('admin.members');
+
 
 });
 
