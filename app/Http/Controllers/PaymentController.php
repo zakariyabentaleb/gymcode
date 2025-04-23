@@ -79,6 +79,13 @@ class PaymentController extends Controller
     {
         return view('payments.cancel');
     }
+
+    public function showPayments()
+{
+    $payments = Payment::with(['user', 'program'])->get();
     
+    return view('admin.payments', compact('payments'));
+}
+
 }
 

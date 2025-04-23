@@ -86,6 +86,8 @@ Route::post('/add-trainer', [EntraineurController::class, 'store'])->name('train
 Route::delete('/trainers/{trainer}', [EntraineurController::class, 'destroy'])->name('trainers.destroy');
 Route::get('/trainers/{trainer}/edit', [EntraineurController::class, 'edit'])->name('trainers.edit');
 Route::put('/trainers/{trainer}', [EntraineurController::class, 'update'])->name('trainers.update');
+Route::get('/payments', [PaymentController::class, 'showPayments'])->name('payments.index');
+
 });
 
 Route::post('/reservation/{id}/cancel', [ReservationController::class, 'cancel'])->name('reservation.cancel');
@@ -107,3 +109,4 @@ Route::middleware(['auth'])->group(function () {
 Route::post('/checkout/{program}', [PaymentController::class, 'checkout'])->name('checkout');
 Route::get('/success', [PaymentController::class, 'success'])->name('payment.success');
 Route::get('/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
+
