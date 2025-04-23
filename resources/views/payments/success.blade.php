@@ -1,0 +1,1 @@
+<h1>Paiement réussi ! Merci pour votre inscription.</h1>

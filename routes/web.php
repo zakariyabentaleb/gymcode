@@ -7,6 +7,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\EntraineurController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\PaymentController;
 
 Route::get('/', function () {
     return view('home');
@@ -101,3 +102,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profil/modifier', [UserController::class, 'edit'])->name('profile.edit');
     Route::post('/profil/update', [UserController::class, 'update'])->name('profile.update');
 });
+
+
+Route::post('/checkout/{program}', [PaymentController::class, 'checkout'])->name('checkout');
+Route::get('/success', [PaymentController::class, 'success'])->name('payment.success');
+Route::get('/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');

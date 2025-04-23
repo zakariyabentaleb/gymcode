@@ -143,9 +143,13 @@
                         <p class="text-sm text-gray-500 mt-1">Offre limitée - Fin dans 2 jours</p>
                     </div>
                     
-                    <a href="#" class="block bg-brand-red hover:bg-red-700 text-white text-center py-4 rounded-xl font-semibold text-lg transition duration-300 mb-4">
-                        S'inscrire au programme
-                    </a>
+                    <form action="{{ route('checkout', ['program' => $program->id]) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="block w-full bg-brand-red hover:bg-red-700 text-white text-center py-4 rounded-xl font-semibold text-lg transition duration-300 mb-4">
+                            S'inscrire au programme
+                        </button>
+                    </form>
+                    
                     
                     <p class="text-center text-sm text-gray-500 mb-6">
                         <i class="fas fa-lock mr-1"></i> Paiement sécurisé | Garantie 30 jours satisfait ou remboursé
