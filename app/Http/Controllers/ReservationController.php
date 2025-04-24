@@ -95,5 +95,6 @@ public function showAllReservations()
     return view('admin.reservations', compact('reservations'));
 }
 
+
 }
 

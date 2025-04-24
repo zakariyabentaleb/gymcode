@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -133,5 +134,12 @@ class UserController extends Controller
    
     return view('admin.membres', compact('users'));
 }
+    public function payments()
+    {
+        $user = Auth::user();
+        $payments = Payment::where('user_id', $user->id)->with('program')->get();
+        return view('user.payments', compact('payments'));
+    }
+
     
 }

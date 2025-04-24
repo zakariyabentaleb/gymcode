@@ -64,6 +64,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
     Route::get('/my-reservations', [ReservationController ::class, 'index'])->name('reservation');
+    Route::get('/my-payments', [UserController::class, 'payments'])->name('payment.show');
 });
 
 

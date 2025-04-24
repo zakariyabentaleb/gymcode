@@ -13,7 +13,7 @@
                 <a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Contact</a>
                 @auth
                 <a href="{{ route('reservation') }}" class="nav-link {{ request()->routeIs('reservation') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Mes Réservations</a>
-                <a href="{{ route('reservation') }}" class="nav-link {{ request()->routeIs('reservation') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Mes Réservations</a>
+                <a href="{{ route('payment.show') }}" class="nav-link {{ request()->routeIs('payment.show') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Mes Payments</a>
 
                 <a href="{{ route('profile.show') }}" class="nav-link {{ request()->routeIs('profile.show') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Profil</a>
                 
