@@ -7,7 +7,7 @@
                 <span class="font-bold text-xl tracking-wider">GYM<span class="text-brand-red">TRACKER</span></span>
             </div>
             <div class="hidden md:flex items-center space-x-10">
-                <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Accueil</a>
+                <a href="{{ route('homee') }}" class="nav-link {{ request()->routeIs('homee') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Accueil</a>
                 <a href="{{ route('programmes') }}" class="nav-link {{ request()->routeIs('programmes') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Programmes</a>
                 <a href="{{ route('entraineur') }}" class="nav-link {{ request()->routeIs('entraineur') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Entraîneurs</a>
                 <a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'text-brand-red' : 'hover:text-brand-red transition duration-300' }} font-medium">Contact</a>

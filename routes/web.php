@@ -11,7 +11,7 @@ use App\Http\Controllers\PaymentController;
 
 Route::get('/', function () {
     return view('home');
-})->name('home');
+})->name('homee');
 
 Route::get('/programmes',[ProgramController::class, 'showProgram'])->name('programmes');
 
