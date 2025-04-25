@@ -33,25 +33,7 @@
                             <span>My Clients</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#" class="flex items-center space-x-3 text-gray-300 p-2 rounded-lg hover:bg-gray-700 transition duration-200">
-                            <i class="fas fa-calendar-alt w-5"></i>
-                            <span>Schedule</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center space-x-3 text-gray-300 p-2 rounded-lg hover:bg-gray-700 transition duration-200">
-                            <i class="fas fa-chart-line w-5"></i>
-                            <span>Client Progress</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center space-x-3 text-gray-300 p-2 rounded-lg hover:bg-gray-700 transition duration-200">
-                            <i class="fas fa-comment-dots w-5"></i>
-                            <span>Messages</span>
-                            <span class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">3</span>
-                        </a>
-                    </li>
+                   
                     <li>
                         <a href="#" class="flex items-center space-x-3 text-gray-300 p-2 rounded-lg hover:bg-gray-700 transition duration-200">
                             <i class="fas fa-cog w-5"></i>
