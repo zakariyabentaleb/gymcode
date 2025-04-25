@@ -34,7 +34,8 @@ class ProgramController extends Controller
     public function showProgram()
     {
         $programs = Program::paginate(6);
-        return view('program', compact('programs'));
+        $categories = Category::all();
+        return view('program', compact('programs', 'categories'));
     }
     public function showProgramDetails($id)
     {
@@ -162,4 +163,49 @@ class ProgramController extends Controller
         $program->delete();
         return redirect()->route('programs.index')->with('success', 'Programme supprimé avec succès.');
     }
+    public function indexx(Request $request)
+    {
+        // Start with a base query
+        $query = Program::query();
+        
+        // Apply search filter if provided
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+        
+        // Apply level filter if provided
+        if ($request->has('level') && !empty($request->level)) {
+            $query->where('level', $request->level);
+        }
+        
+        // Apply category filter if provided
+        if ($request->has('category') && !empty($request->category)) {
+            $query->where('category_id', $request->category);
+        }
+        
+        // Apply duration filter if it exists in your form (not in your current view but mentioned in JS)
+        if ($request->has('duration') && !empty($request->duration)) {
+            $query->where('duree', $request->duration);
+        }
+        
+        // Get filtered results with pagination
+        $programs = $query->latest()->paginate(9);
+        
+        // Get all categories for the filter dropdown
+        $categories = Category::all();
+        
+        // Pass data to the view
+        return view('program', compact('programs', 'categories'));
+    }
+    
+    public function shows($id)
+    {
+        $program = Program::findOrFail($id);
+        return view('program-details', compact('program'));
+    }
 }
+

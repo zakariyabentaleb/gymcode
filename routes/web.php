@@ -113,3 +113,12 @@ Route::post('/checkout/{program}', [PaymentController::class, 'checkout'])->name
 Route::get('/success', [PaymentController::class, 'success'])->name('payment.success');
 Route::get('/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
 
+// Add this to your routes/web.php file
+
+Route::get('/programmes/{id}', [ProgramController::class, 'shows'])->name('programmes-details');
+
+// Contact page route
+Route::get('/programmess', [ProgramController::class, 'indexx'])->name('home');
+
+// Or if you're using a specific route prefix, add it like this:
+// Route::get('/home/ajax-programs', [ProgramController::class, 'ajaxPrograms'])->name('ajax-programs');

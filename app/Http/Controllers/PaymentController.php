@@ -68,7 +68,12 @@ class PaymentController extends Controller
                 ]);
             }
     
-            return view('payments.success'); // Affiche la vue de succès
+            // Affiche la vue de succès
+            $program = Program::find($programId); // Récupération du programme
+           
+        return view('payments.success', [
+            'program' => $program,
+        ]);
         }
     
         return redirect()->route('payment.cancel');

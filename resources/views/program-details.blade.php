@@ -223,7 +223,6 @@
             </div>
         </div>
     </section>
-
     <!-- FAQ Section -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4">

@@ -29,22 +29,70 @@
             </div>
         </section>
 
+        <!-- Search and Filter Section -->
+       
+        
         <!-- Popular Programs Section -->
         <section id="programmes" class="py-20 bg-brand-light">
             <div class="container mx-auto px-4">
-                <div class="text-center mb-16">
-                    <h5 class="text-brand-red font-semibold mb-2 tracking-wider">PROGRAMMES POPULAIRES</h5>
-                    <h2 class="text-3xl font-bold mb-4 text-brand-dark">Nos programmes les plus demandés</h2>
-                    <p class="max-w-2xl mx-auto text-gray-600">Des programmes adaptés à tous les niveaux pour vous aider à atteindre vos objectifs fitness plus rapidement et efficacement.</p>
+                <!-- Section Header -->
+                <div class="text-center mb-12">
+                    <h5 class="text-brand-red font-semibold mb-2 tracking-wider uppercase">Catalogue Complet</h5>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-brand-dark">Tous nos programmes fitness</h2>
+                    <p class="max-w-2xl mx-auto text-gray-600">Découvrez notre gamme complète de programmes fitness, conçus par des experts pour s'adapter à vos objectifs, votre emploi du temps et votre niveau d'expérience.</p>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    @foreach ($programs as $program)
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden program-card">
+                
+                <!-- Filter Section -->
+                <div class="bg-white rounded-lg shadow-md mb-10 p-6">
+                    <form action="{{ route('home') }}" method="GET" id="program-filter-form">
+                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                            <!-- Search Bar -->
+                            <div class="md:w-1/3">
+                                <div class="flex w-full">
+                                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Rechercher un programme..." 
+                                        class="w-full px-4 py-2 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-red">
+                                    <button type="submit" class="bg-brand-red hover:bg-red-700 text-white px-4 py-2 rounded-r-lg transition duration-300 flex items-center justify-center">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Filters -->
+                            <div class="md:w-2/3 flex flex-wrap gap-3">
+                                <select name="level" id="level-filter" class="px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-red text-sm flex-grow">
+                                    <option value="">Niveau</option>
+                                    <option value="debutant" {{ request('level') == 'debutant' ? 'selected' : '' }}>Débutant</option>
+                                    <option value="intermediaire" {{ request('level') == 'intermediaire' ? 'selected' : '' }}>Intermédiaire</option>
+                                    <option value="professionel" {{ request('level') == 'professionel' ? 'selected' : '' }}>Professionel</option>
+                                </select>
+                                
+                                <select name="category" id="category-filter" class="px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-red text-sm flex-grow">
+                                    <option value="">Catégorie</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                
+                                <button type="submit" class="bg-brand-dark hover:bg-gray-800 text-white px-6 py-2 rounded-lg transition duration-300 text-sm font-medium">
+                                    Filtrer
+                                </button>
+                    
+                                @if(request('search') || request('level') || request('duration') || request('category'))
+                                <a href="{{ route('home') }}" class="text-brand-red hover:text-red-700 px-4 py-2 text-sm flex items-center font-medium">
+                                    <i class="fas fa-times mr-1"></i> Réinitialiser
+                                </a>
+                                @endif
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Program Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    @forelse ($programs as $program)
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden program-card hover:shadow-xl transition-all duration-300">
                         <div class="relative">
-                           
-                            <img src="{{ asset('storage/' . $program->image_url) }}" alt="Programme"  class="w-full h-64 object-cover" />
-
+                            <img src="{{ asset('storage/' . $program->image_url) }}" alt="{{ $program->title }}" class="w-full h-64 object-cover" />
                             <div class="absolute top-4 right-4 bg-brand-red text-white text-xs font-semibold px-3 py-1 rounded-lg">POPULAIRE</div>
                         </div>
                         <div class="p-6">
@@ -60,29 +108,60 @@
                                     <div class="text-yellow-500"><i class="fas fa-star-half-alt"></i></div>
                                 </div>
                             </div>
-                            <a href="{{route('programmes-details',['id' => $program->id])}}"><h3 class="text-xl font-semibold mb-2 hover:text-brand-red transition duration-300">Cardio Intensif {{$program->duree}} Semaines</h3></a>
-                            <p class="text-gray-600 mb-4">{{ Str::limit($program->description, 20) }} </p>
+                            <a href="{{route('programmes-details',['id' => $program->id])}}" class="block">
+                                <h3 class="text-xl font-semibold mb-2 hover:text-brand-red transition duration-300">{{ $program->title ?? 'Cardio Intensif ' . $program->duree . ' Semaines' }}</h3>
+                            </a>
+                            <p class="text-gray-600 mb-4 line-clamp-2">{{ $program->description }}</p>
                             <div class="flex justify-between items-center">
                                 <span class="text-brand-red font-bold text-xl">{{$program->price}} DH</span>
-                                <a href="#" class="btn-primary bg-brand-red hover:bg-red-700 text-white py-2 px-5 rounded-lg font-semibold transition duration-300">S'inscrire</a>
+                                <a href="#" class="bg-brand-red hover:bg-red-700 text-white py-2 px-5 rounded-lg font-semibold transition duration-300 inline-block">S'inscrire</a>
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    @empty
+                    <div class="col-span-full">
+                        <div class="bg-white rounded-xl shadow p-10 text-center max-w-lg mx-auto">
+                            <div class="text-5xl text-gray-300 mb-4"><i class="fas fa-search"></i></div>
+                            <h3 class="text-xl font-semibold text-gray-500 mb-2">Aucun programme trouvé</h3>
+                            <p class="text-gray-500 mb-6">Essayez de modifier vos critères de recherche</p>
+                            <a href="{{ route('home') }}" class="bg-brand-red hover:bg-red-700 text-white py-2 px-6 rounded-lg font-semibold transition duration-300 inline-block">
+                                Voir tous les programmes
+                            </a>
+                        </div>
+                    </div>
+                    @endforelse
                 </div>
-
-                {{-- <div class="flex justify-center mt-12">
-                    <a href="#" class="btn-primary bg-brand-dark hover:bg-gray-800 text-white py-3 px-8 rounded-lg font-semibold tracking-wide transition duration-300 flex items-center">
-                        <span>Voir tous les programmes</span>
-                        <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div> --}}
+        
+                <!-- Pagination -->
                 <div class="flex justify-center mt-12">
                     {{ $programs->links('pagination::tailwind') }}
                 </div>
-                
             </div>
         </section>
+        
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle filter removal
+            const removeFilterButtons = document.querySelectorAll('.remove-filter');
+            removeFilterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filterName = this.getAttribute('data-filter');
+                    const filterForm = document.getElementById('program-filter-form');
+                    const filterInput = filterForm.querySelector(`[name="${filterName}"]`);
+                    
+                    if (filterInput) {
+                        if (filterInput.tagName === 'SELECT') {
+                            filterInput.value = '';
+                        } else {
+                            filterInput.value = '';
+                        }
+                        filterForm.submit();
+                    }
+                });
+            });
+        });
+        </script>
+        
 
         <!-- Programs Stats Section -->
         <section class="py-16 bg-brand-dark text-white">
@@ -180,14 +259,83 @@
         <!-- Footer -->
        
      
-        <!-- JavaScript for Mobile Menu Toggle -->
+        <!-- JavaScript for filters and menu toggle -->
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+                // Mobile Menu Toggle
+                const mobileMenuButton = document.getElementById('mobile-menu-button');
+                const mobileMenu = document.getElementById('mobile-menu');
+                
+                if (mobileMenuButton && mobileMenu) {
+                    mobileMenuButton.addEventListener('click', function() {
+                        mobileMenu.classList.toggle('hidden');
+                    });
+                }
+
+                // Apply filters
+                const applyFiltersBtn = document.getElementById('apply-filters');
+                if (applyFiltersBtn) {
+                    applyFiltersBtn.addEventListener('click', function() {
+                        applyFilters();
+                    });
+                }
+
+                // Remove individual filters
+                const removeFilterBtns = document.querySelectorAll('.remove-filter');
+                removeFilterBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const filterType = this.getAttribute('data-filter');
+                        removeFilter(filterType);
+                    });
+                });
+
+                function applyFilters() {
+                    const level = document.getElementById('level-filter').value;
+                    const duration = document.getElementById('duration-filter').value;
+                    const category = document.getElementById('category-filter').value;
+                    const search = document.querySelector('input[name="search"]').value;
+                    
+                    // Build query string
+                    let queryParams = new URLSearchParams(window.location.search);
+                    
+                    if (search) {
+                        queryParams.set('search', search);
+                    } else {
+                        queryParams.delete('search');
+                    }
+                    
+                    if (level) {
+                        queryParams.set('level', level);
+                    } else {
+                        queryParams.delete('level');
+                    }
+                    
+                    if (duration) {
+                        queryParams.set('duration', duration);
+                    } else {
+                        queryParams.delete('duration');
+                    }
+                    
+                    if (category) {
+                        queryParams.set('category', category);
+                    } else {
+                        queryParams.delete('category');
+                    }
+                    
+                    // Redirect with query params
+                    window.location.href = '{{ route("home") }}' + (queryParams.toString() ? '?' + queryParams.toString() : '');
+                }
+
+                function removeFilter(filterType) {
+                    let queryParams = new URLSearchParams(window.location.search);
+                    queryParams.delete(filterType);
+                    
+                    // Redirect with updated query params
+                    window.location.href = '{{ route("home") }}' + (queryParams.toString() ? '?' + queryParams.toString() : '');
+                }
+            });
+
+        </script>
         
-        mobileMenuButton.addEventListener('click', function() {
-            mobileMenu.classList.toggle('hidden');
-        });
-    });
-    @endsection
+    </body>
+@endsection
