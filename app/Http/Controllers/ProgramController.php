@@ -53,22 +53,21 @@ class ProgramController extends Controller
     public function store(Request $request)
     {
         
-        //  dd($request->all());
-    
+     
         // Validation des données
-        $prog = $request->validate([
+         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'level' => 'required|in:debutant,intermediaire,professionel',
             'price' => 'required|numeric|min:0',
             'duree' => 'required|integer|min:1|max:40',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'trainer_id' => 'required|exists:trainers,id',
+            'trainer_id' => 'required|exists:users,id',
             'category_id'=> 'required|exists:categories,id',
         ]);
-    
+        
         // Vérification après validation
-        //  dd($prog);
+    
     
        
         $path = $request->file('image')->store('program_images', 'public');
@@ -85,7 +84,7 @@ class ProgramController extends Controller
             'trainer_id' => $request->trainer_id,
         ]);
     
-        return redirect()->route('programs.store')->with('success', 'Programme ajouté avec succès.');
+        return redirect()->route('programs.index')->with('success', 'Programme ajouté avec succès.');
     }
     
     public function show(Program $program)

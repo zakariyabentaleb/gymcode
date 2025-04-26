@@ -20,7 +20,8 @@ class EntraineurController extends Controller
     public function index()
     {
        
-        $trainers = Trainer::all();
+        // $trainers = Trainer::all();
+        $trainers = User::where('role', 'trainer')->get(); 
           
         $categories = Category::all();
         

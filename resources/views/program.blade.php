@@ -93,7 +93,7 @@
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden program-card hover:shadow-xl transition-all duration-300">
                         <div class="relative">
                             <img src="{{ asset('storage/' . $program->image_url) }}" alt="{{ $program->title }}" class="w-full h-64 object-cover" />
-                            <div class="absolute top-4 right-4 bg-brand-red text-white text-xs font-semibold px-3 py-1 rounded-lg">POPULAIRE</div>
+                            <div class="absolute top-4 right-4 bg-brand-red text-white text-xs font-semibold px-3 py-1 rounded-lg"></div>
                         </div>
                         <div class="p-6">
                             <div class="flex items-center mb-3">

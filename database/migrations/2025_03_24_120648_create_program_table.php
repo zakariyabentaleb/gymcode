@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('price', 8, 2); 
             $table->string('image_url'); 
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-            $table->foreignId('trainer_id')->constrained('trainers')->onDelete('cascade'); 
+            $table->foreignId('trainer_id')->constrained('users')->onDelete('cascade'); 
             $table->integer('duree')->default(1);
             $table->timestamps();  
         });

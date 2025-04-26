@@ -120,7 +120,7 @@
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <select id="trainer_id" name="trainer_id" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
                                                 @foreach ($trainers as $trainer)
-                                                    <option value="{{ $trainer->id }}">{{ $trainer->name }} - {{ $trainer->specialty }}</option>
+                                                    <option value="{{ $trainer->id }}">{{ $trainer->full_name }} - {{ $trainer->specialty }}</option>
                                                 @endforeach
                                             </select>
                                             

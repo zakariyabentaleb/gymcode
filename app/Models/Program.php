@@ -24,7 +24,7 @@ class Program extends Model
 
     public function trainer()
     {
-        return $this->belongsTo(Trainer::class);
+        return $this->belongsTo(User::class);
     }
     
     public function category()
