@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -69,7 +70,8 @@ Route::middleware('auth')->group(function () {
 
 
 Route::middleware(['admin'])->group(function () {
-    Route::get('/admin-dashboard', function () { return view('admin.dashboard'); })->name('admin-dashboard');
+    //    Route::get('/admin-dashboard', function () { return view('admin.dashboard'); })->name('admin-dashboard');
+      Route::get('/admin-dashboard', [AdminController::class,'index'])->name('admin-dashboard');
     Route::get('/programs', [ProgramController::class, 'index'])->name('programs.index');
     Route::get('/programs/create', [ProgramController::class, 'create'])->name('programs.create');
     Route::post('/programs', [ProgramController::class, 'store'])->name('programs.store');
@@ -89,7 +91,6 @@ Route::get('/trainers/{trainer}/edit', [EntraineurController::class, 'edit'])->n
 Route::put('/trainers/{trainer}', [EntraineurController::class, 'update'])->name('trainers.update');
 Route::get('/payments', [PaymentController::class, 'showPayments'])->name('payments.index');
 Route::get('/membres', [UserController::class, 'showPayingMembers'])->name('admin.members');
-
 
 });
 
