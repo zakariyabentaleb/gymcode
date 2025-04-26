@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Program;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\User;
 use App\Models\Trainer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -95,7 +96,8 @@ class ProgramController extends Controller
     
     public function edit(Program $program)
     {   
-        $trainers = Trainer::all(); 
+        // $trainers = Trainer::all(); 
+        $trainers = User::where('role', 'trainer')->get(); 
     $categories = Category::all(); 
         return view('admin.edit-program', compact('program', 'trainers', 'categories'));
     }
@@ -121,7 +123,7 @@ class ProgramController extends Controller
             'price' => 'required|numeric|min:0',
             'duree' => 'required|integer|min:1|max:40',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
-            'trainer_id' => 'required|exists:trainers,id',
+            'trainer_id' => 'required|exists:users,id',
             'category_id'=> 'required|exists:categories,id',
         ]);
     
