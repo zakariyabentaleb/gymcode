@@ -183,7 +183,7 @@
                         </div>
                 
                         <!-- Member or Trainer Selection -->
-                        <div>
+                        {{-- <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Type de compte</label>
                             <div class="flex space-x-6">
                                 <div class="flex items-center">
@@ -195,7 +195,7 @@
                                     <label for="role_trainer" class="ml-2 text-sm text-gray-700">Coach</label>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                 
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
@@ -215,12 +215,7 @@
                                 </div>
                                 <input id="password" name="password" type="password" required class="bg-white focus:ring-brand-red focus:border-brand-red block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm text-sm" placeholder="8+ caractères">
                             </div>
-                            <div class="mt-1 flex items-center space-x-1">
-                                <div class="h-1 w-12 bg-gray-200 rounded-full"></div>
-                                <div class="h-1 w-12 bg-gray-200 rounded-full"></div>
-                                <div class="h-1 w-12 bg-gray-200 rounded-full"></div>
-                                <span class="text-xs text-gray-500 ml-1">Force du mot de passe</span>
-                            </div>
+                            
                         </div>
                 
                         <div>

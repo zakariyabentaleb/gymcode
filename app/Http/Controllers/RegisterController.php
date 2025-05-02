@@ -18,35 +18,38 @@ class RegisterController extends Controller
             'full_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Password::defaults()],
-            'role' => ['required', Rule::in(['member', 'trainer'])], 
+            //  'role' => ['required', Rule::in(['member', 'trainer'])], 
             'terms' => ['required', 'accepted'],
         ]);
+        $validated['role'] = 'member';
+       
 
         $user = User::create([
             'full_name' => $validated['full_name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'role' => $validated['role'],
+            'role' =>  $validated['role'],
             'terms_accepted' => true,
         ]);
+       
         
-        if ($validated['role'] === 'trainer') {
-            $user = Trainer::create([
-                'full_name' => $validated['full_name'],
-                'email' => $validated['email'],
-                'password' => Hash::make($validated['password']),
-                'role' => 'trainer',
-                'terms_accepted' => true,
-            ]);
-        } else {
-            $user = Membre::create([
-                'full_name' => $validated['full_name'],
-                'email' => $validated['email'],
-                'password' => Hash::make($validated['password']),
-                'role' => 'member',
-                'terms_accepted' => true,
-            ]);
-        }
+        // if ($validated['role'] === 'trainer') {
+        //     $user = Trainer::create([
+        //         'full_name' => $validated['full_name'],
+        //         'email' => $validated['email'],
+        //         'password' => Hash::make($validated['password']),
+        //         'role' => 'trainer',
+        //         'terms_accepted' => true,
+        //     ]);
+        // } else {
+        //     $user = Membre::create([
+        //         'full_name' => $validated['full_name'],
+        //         'email' => $validated['email'],
+        //         'password' => Hash::make($validated['password']),
+        //         'role' => 'member',
+        //         'terms_accepted' => true,
+        //     ]);
+        // }
 
         Auth::login($user);
 
