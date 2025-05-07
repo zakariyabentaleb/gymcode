@@ -98,11 +98,11 @@ Route::post('/reservation/{id}/cancel', [ReservationController::class, 'cancel']
 Route::delete('/reservation/{id}/delete', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 Route::get('/reservations', [ReservationController::class, 'showAllReservations'])->name('reservations.show');
 
-
+Route::middleware(['trainer'])->group(function () {
 Route::get('/trainer', [EntraineurController::class, 'trainerDashboard'])->name('trainer-dashboard');
 Route::post('/trainer/reservations/{reservation}/confirm', [EntraineurController::class, 'confirmReservation'])->name('trainer.confirm.reservation');
 Route::post('/trainer/reservations/{reservation}/cancel', [EntraineurController::class,'cancelReservation'])->name('trainer.cancel.reservation');
-
+});
 Route::middleware(['auth'])->group(function () {
     Route::get('/profil', [UserController::class, 'show'])->name('profile.show');
     Route::get('/profil/modifier', [UserController::class, 'edit'])->name('profile.edit');

@@ -179,21 +179,17 @@ if ($request->hasFile('photo')) {
                     ->get();
     
     // Get today's confirmed sessions
-    $today = date('Y-m-d');
+ 
     $todaysSessions = Reservation::where('trainer_id', $trainer_id)
                       ->where('status', 'confirmed')
-                      ->where('date', $today)
                       ->with('membre')
-                      ->orderBy('time')
+                   
                       ->get();
     
     // Get recent canceled sessions
     $recentCanceled = Reservation::where('trainer_id', $trainer_id)
                       ->where('status', 'canceled')
-                      ->where('date', '>=', date('Y-m-d', strtotime('-7 days')))
                       ->with('membre')
-                      ->orderBy('date', 'desc')
-                      ->orderBy('time')
                       ->limit(5)
                       ->get();
     
